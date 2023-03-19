@@ -17,7 +17,7 @@ const Offer = () => {
 		<div className='mt-2 relative'>
 			<img src={offerBg} className='w-screen' />
 			<div className='flex justify-center items-center py-1 bg-secondary absolute bottom-[calc(23vh-56px)] w-full'>
-				<h3 className='text-primary font-sans font-bold text-5xl tracking-wider mr-56'>ПРИСОЕДИНЯЙСЯ</h3>
+				<h3 className='text-primary font-Alumni font-bold text-5xl leading-100% tracking-wider mr-56'>ПРИСОЕДИНЯЙСЯ</h3>
 				<div>
 					<input
 						value={value}
@@ -26,7 +26,6 @@ const Offer = () => {
 						placeholder='Ваша эл. почта' 
 					/>
 					<button 
-						disabled
 						onClick={clickSubscribe}
 						className='text-quaternary bg-primary text-xl h-40px px-3.5'
 					>ПОДПИСАТЬСЯ</button>

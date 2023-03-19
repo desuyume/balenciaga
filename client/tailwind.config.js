@@ -6,8 +6,9 @@ module.exports = {
 	content: ['./src/**/*.{js,jsx,ts,tsx}'],
 	theme: {
 		fontFamily: {
-			sans: ['Alumni Sans', ...defaultTheme.fontFamily.sans],
-			serif: ['Inika', ...defaultTheme.fontFamily.serif],
+			Alumni: ['Alumni Sans', ...defaultTheme.fontFamily.sans],
+			Inter: ['Inter', ...defaultTheme.fontFamily.sans],
+			OpenSans: ['Open Sans', ...defaultTheme.fontFamily.sans],
 		},
 		extend: {
 			colors: {
@@ -25,9 +26,11 @@ module.exports = {
 				'33.3vw': '33.3vw',
 				'650px': '650px',
 				'400px': '400px',
+				'175px': '10.9375rem',
 				'30px': '30px',
 			},
 			height: {
+				'123px': '123px',
 				'87.7vh': '87.7vh',
 				'87.7%': '87.7%',
 				'60.6vh': '60.6vh',
@@ -38,15 +41,22 @@ module.exports = {
 				'600px': '600px',
 				'100px': '100px',
 				'30px': '30px',
+				'9.5': '2.375rem',
+				'72.25vh': '72.25vh',
 			},
 			spacing: {
 				'13.7vh': '13.7vh',
 				'12.2vh': '12.2vh',
 				'23vh': '23vh',
+				'7.5': '1.875rem',
 				'15': '3.75rem',
 				'12.66vw': '12.66vw',
+				'14.9vw': '14.9vw',
+				'76px': '4.75rem',
+				'1.25': '0.3125rem',
 			},
 			letterSpacing: {
+				wide: '.05em',
 				wider: '.1em',
 				widest: '.2em',
 			},
@@ -62,6 +72,15 @@ module.exports = {
 			backgroundPosition: {
 				'top-4': 'center top -1rem',
 			},
+			lineHeight: {
+				'100%': '100%',
+			},
+			boxShadow: {
+				'btn-shadow': 'box-shadow: inset 0px 0px 6px 2px rgba(21, 9, 10, 0.3);',
+			},
+			opacity: {
+				'65': '.65',
+			}
 		},
 	},
 	plugins: [],

@@ -10,10 +10,10 @@ const Timer = () => {
 
 	return (
 		<div className='flex flex-col items-center'>
-			<h2 className='font-bold text-xl text-quaternary tracking-wider'>
+			<h2 className='font-bold text-xl leading-100% text-quaternary tracking-wider'>
 				ЗИМНЯЯ КОЛЛЕКЦИЯ
 			</h2>
-			<div className='flex font-bold text-4xl text-quaternary tracking-wider mt-2.5'>
+			<div className='flex font-bold text-4xl leading-100% text-quaternary tracking-wider mt-2.5'>
 				<div className='flex flex-col items-center'>
 					<p>{days}</p>
 					<p className='text-base font-normal tracking-normal'>дней</p>
@@ -34,7 +34,7 @@ const Timer = () => {
 					<p className='text-base font-normal tracking-normal'>секунд</p>
 				</div>
 			</div>
-			<button className='bg-primary  border-2 border-quaternary text-quaternary text-xl font-bold font-serif px-6 py-2 mt-5'>
+			<button className='bg-primary border-2 border-quaternary text-quaternary text-xl font-bold tracking-wide px-6 py-1 mt-5'>
 				ПОСМОТРЕТЬ
 			</button>
 		</div>

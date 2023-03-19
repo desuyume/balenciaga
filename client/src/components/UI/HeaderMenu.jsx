@@ -5,7 +5,7 @@ const HeaderMenu = ({ links }) => {
 		<nav>
 			{links.map(link => (
 				<a
-					className='text-primary text-xl mr-5 last:mr-0'
+					className='text-primary text-xl mr-7.5 last:mr-0'
 					key={link.title}
 					href={link.to}
 				>

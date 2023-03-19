@@ -25,39 +25,33 @@ const FirstScreen = () => {
 	}
 
 	return (
-		<div className='bg-firstScreenImg1 pt-13.7vh bg-no-repeat bg-top bg-cover bg-opacity-90 h-screen relative'>
+		<div className='bg-firstScreenImg1 pt-13.7vh bg-no-repeat bg-top bg-cover bg-opacity-90 h-screen relative flex flex-col'>
 			<MainTitle />
-			<div className='w-1/2 h-60.6vh flex flex-col justify-between items-center'>
-				<p className='text-tertiary leading-5 text-xl tracking-wider mt-2.5'>
+			<div className='w-1/2 h-full flex flex-col justify-between items-center'>
+				<p className='text-tertiary font-OpenSans font-semibold leading-6 text-xl tracking-wide mt-2.5'>
 					Откройте для себя официальный
 					<br /> онлайн-бутик Balenciaga.
 					<br />
 					<br /> Ознакомьтесь с последними коллекциями
 					<br /> кроссовок, сумок и одежды для женщин и<br /> мужчин.
 				</p>
-				<div className='flex flex-col items-center'>
+				<div className='flex justify-center items-center'>
 					<Timer />
-					<a href='#about'>
+					<a className='ml-15' href='#about'>
 						<img src={arrow} alt='arrow-img' />
 					</a>
-					<a
-						href='tel:+16468891895'
-						className='text-tertiary font-sans text-3xl'
-					>
-						+1 646 889 1895
-					</a>
+				</div>
+				<div className='w-full'>
+					<button className='text-tertiary font-OpenSans font-semibold bg-primary bg-opacity-25 hover:bg-opacity-50 hover:text-secondary transition-all py-5 text-3xl w-1/3'>
+						Войти
+					</button>
+					<button className='text-tertiary font-OpenSans font-semibold bg-secondary bg-opacity-25 hover:bg-opacity-50 hover:text-secondary transition-all py-5 text-3xl w-2/3'>
+						Регистрация
+					</button>
 				</div>
 			</div>
-			<div className='w-1/2 absolute bottom-0'>
-				<button className='text-tertiary bg-primary bg-opacity-25 hover:bg-opacity-50 hover:text-secondary transition-all py-5 font-sans text-3xl w-1/3'>
-					Войти
-				</button>
-				<button className='text-tertiary bg-secondary bg-opacity-25 hover:bg-opacity-50 hover:text-secondary transition-all py-5 font-sans text-3xl w-2/3'>
-					Регистрация
-				</button>
-			</div>
 
-			<Carousel
+			{/* <Carousel
 				autoPlay={false}
 				infiniteLoop={true}
 				showStatus={false}
@@ -70,13 +64,13 @@ const FirstScreen = () => {
 			>
 				<img className='object-contain h-87.7vh' src={firstScreenImg1} />
 				<img className='object-contain h-87.7vh' src={firstScreenImg2} />
-			</Carousel>
+			</Carousel> */}
 
-			{/* <img
+			<img
 				src={activeImg}
 				onClick={switchImg}
 				className='h-87.7vh absolute top-12.2vh right-0 bottom-0'
-			/> */}
+			/>
 		</div>
 	)
 }

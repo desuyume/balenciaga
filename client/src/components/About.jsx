@@ -21,7 +21,7 @@ const About = () => {
 			>
 				<div className='relative'>
 					<img className='w-screen' src={aboutImg1} />
-					<p className='text-secondary text-4xl absolute right-40 bottom-[calc(50%-100px)]'>
+					<p className='text-secondary font-OpenSans text-4xl leading-100% absolute right-40 bottom-[calc(50%-100px)]'>
 						Balenciaga — роскошный
 						<br />
 						модный дом, основанный
@@ -35,7 +35,7 @@ const About = () => {
 				</div>
 				<div>
 					<img className='w-screen' src={aboutImg2} />
-					<p className='text-secondary bg-primary text-4xl absolute py-8 px-14 left-0 bg-opacity-60 bottom-[calc(50%-92px)]'>
+					<p className='text-secondary font-OpenSans bg-primary text-4xl leading-100% absolute py-8 px-14 left-0 bg-opacity-65 bottom-[calc(50%-86px)]'>
 						Произошло это в Сан-Себастьяне,
 						<br />
 						Испания, хоть в настоящее время
@@ -45,7 +45,7 @@ const About = () => {
 				</div>
 				<div>
 					<img className='w-screen' src={aboutImg3} />
-					<p className='text-secondary bg-primary text-4xl absolute py-3 px-12 right-0 bg-opacity-60 bottom-[calc(50%-100px)]'>
+					<p className='text-secondary font-OpenSans bg-primary text-4xl leading-100% absolute py-4 px-12 right-0 bg-opacity-65 bottom-[calc(50%-75px)]'>
 						Кристиан Диор назвал
 						<br /> Баленсиагу «мастером всех
 						<br /> нас». Его пышные юбки и<br /> странные, женственные, но
@@ -54,7 +54,7 @@ const About = () => {
 					</p>
 				</div>
 				<div>
-					<p className='text-secondary font-light text-5xl absolute left-[calc(50%-277px)] top-[calc(50%-96px)]'>
+					<p className='text-secondary font-light font-OpenSans text-5xl leading-100% absolute left-[calc(50%-310px)] top-[calc(50%-96px)]'>
 						Balenciaga
 						<br />
 						закрылся в 1972 году и был
