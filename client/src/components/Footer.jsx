@@ -2,6 +2,7 @@ import React from 'react'
 import Contacts from './UI/Contacts'
 import Copyright from './UI/Copyright'
 import FooterMenu from './UI/FooterMenu'
+import OrderButton from './UI/OrderButton'
 import Socials from './UI/Socials'
 
 const Footer = () => {
@@ -9,15 +10,15 @@ const Footer = () => {
 		<div className='bg-secondary py-4 relative flex justify-between pr-8 pl-24'>
 			<FooterMenu
 				links={[
-					{ title: 'Главная', to: '#' },
-					{ title: 'О продукте', to: '#' },
-					{ title: 'Коллекция', to: '#' },
-					{ title: 'Отзывы', to: '#' },
-					{ title: 'Заказать', to: '#' },
+					{ title: 'Главная', to: '/' },
+					{ title: 'О продукте', to: '#about' },
+					{ title: 'Коллекция', to: '#collection' },
+					{ title: 'Отзывы', to: '#reviews' },
+					{ title: 'Заказать', to: '#feedback' },
 				]}
 			/>
 			<Copyright />
-			<button className='absolute bottom-14 left-[calc(50%-114px)] bg-primary text-secondary text-5xl leading-100% font-Alumni h-9 flex items-center pr-10 pl-12 mt-12'>ЗАКАЗАТЬ</button>
+			<OrderButton title="ЗАКАЗАТЬ" />
 			<div className='flex flex-col justify-end items-end'>
 				<Socials />
 				<Contacts />
