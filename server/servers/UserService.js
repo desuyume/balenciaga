@@ -5,7 +5,7 @@ const UserModel = require('../models/UserModel');
 const tokenService = require('./TokenService');
 
 class UserService {
-	async registration(email, password, firstName, secondName) {
+	async registration(email, password, name) {
 		const candidate = await UserModel.findOne({ email });
 
 		if (candidate) {
@@ -18,8 +18,7 @@ class UserService {
 		const user = await UserModel.create({
 			email,
 			password: hashPassword,
-			firstName,
-			secondName
+			name
 		});
 		const userDto = new UserDto(user);
 
