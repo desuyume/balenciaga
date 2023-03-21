@@ -4,6 +4,7 @@ import Copyright from './UI/Copyright'
 import FooterMenu from './UI/FooterMenu'
 import OrderButton from './UI/OrderButton'
 import Socials from './UI/Socials'
+import triangleImg from '../assets/footerTriangle.svg'
 
 const Footer = () => {
 	return (
@@ -23,6 +24,9 @@ const Footer = () => {
 				<Socials />
 				<Contacts />
 			</div>
+			<img src={triangleImg} className='absolute top-[-23px] left-[-30px] z-10' />
+			<img src={triangleImg} className='absolute top-[-23px] left-[calc(50%-30px)] z-10' />
+			<img src={triangleImg} className='absolute top-[-23px] right-[-30px] z-10' />
 		</div>
 	)
 }

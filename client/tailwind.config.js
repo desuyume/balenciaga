@@ -29,9 +29,9 @@ module.exports = {
 			},
 			backgroundImage: {
 				firstScreenImg1:
-					"linear-gradient(rgba(21, 9, 10, 0.9), rgba(21, 9, 10, 0.9)), url('/src/assets/firstscreen-img1.jpg')",
+					"linear-gradient(rgba(21, 9, 10, 0.9), rgba(21, 9, 10, 0.9)), url('/src/assets/firstscreen-img1.webp')",
 				firstScreenImg2:
-					"linear-gradient(rgba(21, 9, 10, 0.9), rgba(21, 9, 10, 0.9)), url('/src/assets/firstscreen-img2.jpg')",
+					"linear-gradient(rgba(21, 9, 10, 0.9), rgba(21, 9, 10, 0.9)), url('/src/assets/firstscreen-img2.webp')",
 				reviewBg:
 					"linear-gradient(rgba(21, 9, 10, 0.8), rgba(21, 9, 10, 0.8)), url('/src/assets/review-img.jpg')",
 				offerBg: "url('/src/assets/offer-bg.png')",
@@ -42,6 +42,26 @@ module.exports = {
 			},
 			lineHeight: {
 				'100%': '100%',
+			},
+			animation: {
+				'title-appear': 'titleAppear 1s ease-in 1',
+				'flicker': 'flicker 0.5s ease-in-out infinite alternate'
+			},
+			keyframes: {
+				titleAppear: {
+					'0%': { marginRight: '100%' },
+					'100%': { marginRight: '1.5rem' },
+				},
+				flicker: {
+					'0%': {
+						opacity: '0.6',
+						textShadow: '2px 2px 5px #FBE9EA'
+					},
+					'100%': {
+						opacity: '1',
+						textShadow: '2px 2px 10px #FBE9EA'
+					}
+				}
 			},
 		},
 	},

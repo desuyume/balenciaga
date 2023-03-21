@@ -7,6 +7,7 @@
 		font-family: 'Inter', sans-serif;
 		font-weight: 400;
 		scroll-behavior: smooth;
+		overflow-x: hidden;
 	}
 }
 
@@ -15,4 +16,16 @@ body {
 	padding: 0;
 	box-sizing: border-box;
 	background: #15090a;
+}
+
+body::-webkit-scrollbar {
+  width: 6px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #DDCBCB;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #15090A;
 }
