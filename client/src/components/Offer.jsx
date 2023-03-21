@@ -1,17 +1,11 @@
 import React, { useState } from 'react'
 import offerBg from '../assets/offer-bg.png'
+import useValidation from '../hooks/useValidation'
 import { ValidateEmail } from '../utils/Validation'
 
 const Offer = () => {
-	const [value, setValue] = useState('')
-
-	const clickSubscribe = () => {
-		if (!ValidateEmail(value)) {
-			console.log('неверный формат эл. адреса')
-		} else {
-			console.log('верный формат почты');
-		}
-	}
+	const [email, setEmail] = useState('')
+	const isValidEmail = useValidation(email, ValidateEmail)
 
 	return (
 		<div className='mt-2 relative'>
@@ -20,14 +14,14 @@ const Offer = () => {
 				<h3 className='text-primary font-Alumni font-bold text-5xl leading-100% tracking-wider mr-56'>ПРИСОЕДИНЯЙСЯ</h3>
 				<div>
 					<input
-						value={value}
-						onChange={e => setValue(e.target.value)}
-						className='bg-transparent text-primary text-xl placeholder:text-primary placeholder:text-opacity-70 border border-primary pl-4 w-[250px] h-[40px] outline-none' 
+						value={email}
+						onChange={e => setEmail(e.target.value)}
+						className={'bg-transparent text-primary text-xl placeholder:text-primary placeholder:text-opacity-70 border border-primary pl-4 w-[250px] h-[40px] outline-none transition-colors ' +  (isValidEmail && 'border-green-600')}
 						placeholder='Ваша эл. почта' 
 					/>
 					<button 
-						onClick={clickSubscribe}
-						className='text-quaternary bg-primary text-xl h-[40px] px-3.5'
+						className='text-quaternary bg-primary text-xl h-[40px] px-3.5 disabled:opacity-90 transition-opacity'
+						disabled={!isValidEmail}
 					>ПОДПИСАТЬСЯ</button>
 				</div>
 			</div>
