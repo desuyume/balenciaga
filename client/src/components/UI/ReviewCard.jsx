@@ -6,10 +6,10 @@ import likeImg from '../../assets/like-bttn.svg'
 
 const ReviewCard = () => {
 	return (
-		<div className='bg-primary w-66.6vw h-29.1vw flex'>
+		<div className='bg-primary w-[66.6vw] h-[29.1vw] flex'>
 			<img className='h-full' src={reviewImg} />
 			<div className='w-full flex justify-center'>
-				<div className='w-33.3vw flex flex-col justify-evenly'>
+				<div className='w-[33.3vw] flex flex-col justify-evenly'>
 					<div className='flex justify-between items-center'>
 						<h2 className='font-bold text-secondary text-xl'>Ник</h2>
 						<p className='text-secondary'>10.11.2022</p>

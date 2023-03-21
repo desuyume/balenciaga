@@ -35,7 +35,7 @@ const About = () => {
 				</div>
 				<div>
 					<img className='w-screen' src={aboutImg2} />
-					<p className='text-secondary font-OpenSans bg-primary text-4xl leading-100% absolute py-8 px-14 left-0 bg-opacity-65 bottom-[calc(50%-86px)]'>
+					<p className='text-secondary font-OpenSans bg-primary text-4xl leading-100% absolute py-8 px-14 left-0 bg-opacity-[.65] bottom-[calc(50%-86px)]'>
 						Произошло это в Сан-Себастьяне,
 						<br />
 						Испания, хоть в настоящее время
@@ -45,7 +45,7 @@ const About = () => {
 				</div>
 				<div>
 					<img className='w-screen' src={aboutImg3} />
-					<p className='text-secondary font-OpenSans bg-primary text-4xl leading-100% absolute py-4 px-12 right-0 bg-opacity-65 bottom-[calc(50%-75px)]'>
+					<p className='text-secondary font-OpenSans bg-primary text-4xl leading-100% absolute py-4 px-12 right-0 bg-opacity-[.65] bottom-[calc(50%-75px)]'>
 						Кристиан Диор назвал
 						<br /> Баленсиагу «мастером всех
 						<br /> нас». Его пышные юбки и<br /> странные, женственные, но

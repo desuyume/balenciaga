@@ -22,12 +22,12 @@ const Offer = () => {
 					<input
 						value={value}
 						onChange={e => setValue(e.target.value)}
-						className='bg-transparent text-primary text-xl placeholder:text-primary placeholder:text-opacity-70 border border-primary pl-4 w-250px h-40px outline-none' 
+						className='bg-transparent text-primary text-xl placeholder:text-primary placeholder:text-opacity-70 border border-primary pl-4 w-[250px] h-[40px] outline-none' 
 						placeholder='Ваша эл. почта' 
 					/>
 					<button 
 						onClick={clickSubscribe}
-						className='text-quaternary bg-primary text-xl h-40px px-3.5'
+						className='text-quaternary bg-primary text-xl h-[40px] px-3.5'
 					>ПОДПИСАТЬСЯ</button>
 				</div>
 			</div>

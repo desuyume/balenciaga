@@ -1,4 +1,5 @@
 import About from './components/About';
+import Advantages from './components/Advantages'
 import Feedback from './components/Feedback'
 import FirstScreen from './components/FirstScreen';
 import Footer from './components/Footer'
@@ -13,6 +14,7 @@ function App() {
 			<FirstScreen />
 			<About />
 			<Offer />
+			<Advantages />
 			<Review />
 			<Feedback />
 			<Footer />
