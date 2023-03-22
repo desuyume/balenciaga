@@ -20,19 +20,19 @@ const FeedbackForm = () => {
 				value={header}
 				onChange={e => setHeader(e.target.value)}
 				placeholder='Заголовок'
-				isValid={isValidHeader}
+				isvalid={isValidHeader ? 1 : 0}
 			/>
 			<FormInput
 				value={name}
 				onChange={e => setName(e.target.value)}
 				placeholder='Ваше имя'
-				isValid={isValidName}
+				isvalid={isValidName ? 1 : 0}
 			/>
 			<FormInput
 				value={email}
 				onChange={e => setEmail(e.target.value)}
 				placeholder='Ваш электронный адрес'
-				isValid={isValidEmail}
+				isvalid={isValidEmail ? 1 : 0}
 			/>
 			<textarea
 				value={message}

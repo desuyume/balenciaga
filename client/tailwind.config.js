@@ -45,7 +45,9 @@ module.exports = {
 			},
 			animation: {
 				'title-appear': 'titleAppear 1s ease-in 1',
-				'flicker': 'flicker 0.5s ease-in-out infinite alternate'
+				'flicker': 'flicker 0.5s ease-in-out infinite alternate',
+				'advAppear': 'advAppear 0.7s linear 1 forwards',
+				'timeAnim': 'timeline 7.5s linear infinite'
 			},
 			keyframes: {
 				titleAppear: {
@@ -60,6 +62,26 @@ module.exports = {
 					'100%': {
 						opacity: '1',
 						textShadow: '2px 2px 10px #FBE9EA'
+					},
+				},
+				advAppear: {
+					'0%': {
+						opacity: '0',
+					},
+					'100%': {
+						opacity: '1',
+					},
+				},
+				timeline: {
+					'0%': {
+						left: '20px',
+					},
+					'80%': {
+						opacity: '1',
+					},
+					'100%': {
+						left: '655px',
+						opacity: '0',
 					}
 				}
 			},

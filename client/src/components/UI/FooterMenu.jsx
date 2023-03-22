@@ -7,7 +7,7 @@ const FooterMenu = ({ links }) => {
 				<a 
 					key={link.title} 
 					href={link.to}
-					className='text-primary text-xl leading-100% mb-1.25 last:mb-0 w-fit'
+					className='text-primary text-xl leading-100% mb-1.25 last:mb-0 w-fit hover:text-tertiary transition-colors'
 				>
 					{link.title}
 				</a>
