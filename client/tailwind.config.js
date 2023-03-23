@@ -32,6 +32,12 @@ module.exports = {
 					"linear-gradient(rgba(21, 9, 10, 0.9), rgba(21, 9, 10, 0.9)), url('/src/assets/firstscreen-img1.webp')",
 				firstScreenImg2:
 					"linear-gradient(rgba(21, 9, 10, 0.9), rgba(21, 9, 10, 0.9)), url('/src/assets/firstscreen-img2.webp')",
+				firstScreenImg3:
+					"linear-gradient(rgba(21, 9, 10, 0.9), rgba(21, 9, 10, 0.9)), url('/src/assets/firstscreen-img3.webp')",
+				firstScreenImg4:
+					"linear-gradient(rgba(21, 9, 10, 0.9), rgba(21, 9, 10, 0.9)), url('/src/assets/firstscreen-img4.webp')",
+				firstScreenImg5:
+					"linear-gradient(rgba(21, 9, 10, 0.9), rgba(21, 9, 10, 0.9)), url('/src/assets/firstscreen-img5.webp')",
 				reviewBg:
 					"linear-gradient(rgba(21, 9, 10, 0.8), rgba(21, 9, 10, 0.8)), url('/src/assets/review-img.jpg')",
 				offerBg: "url('/src/assets/offer-bg.png')",
@@ -45,9 +51,9 @@ module.exports = {
 			},
 			animation: {
 				'title-appear': 'titleAppear 1s ease-in 1',
-				'flicker': 'flicker 0.5s ease-in-out infinite alternate',
-				'advAppear': 'advAppear 0.7s linear 1 forwards',
-				'timeAnim': 'timeline 7.5s linear infinite'
+				flicker: 'flicker 0.5s ease-in-out infinite alternate',
+				advAppear: 'advAppear 0.7s linear 1 forwards',
+				timeAnim: 'timeline 7.5s linear infinite',
 			},
 			keyframes: {
 				titleAppear: {
@@ -57,11 +63,11 @@ module.exports = {
 				flicker: {
 					'0%': {
 						opacity: '0.6',
-						textShadow: '2px 2px 5px #FBE9EA'
+						textShadow: '2px 2px 5px #FBE9EA',
 					},
 					'100%': {
 						opacity: '1',
-						textShadow: '2px 2px 10px #FBE9EA'
+						textShadow: '2px 2px 10px #FBE9EA',
 					},
 				},
 				advAppear: {
@@ -82,8 +88,8 @@ module.exports = {
 					'100%': {
 						left: '655px',
 						opacity: '0',
-					}
-				}
+					},
+				},
 			},
 		},
 	},

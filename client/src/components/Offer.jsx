@@ -16,7 +16,7 @@ const Offer = () => {
 					<input
 						value={email}
 						onChange={e => setEmail(e.target.value)}
-						className={'bg-transparent text-primary text-xl placeholder:text-primary placeholder:text-opacity-70 border border-primary pl-4 w-[250px] h-[40px] outline-none transition-colors ' +  (isValidEmail && 'border-green-600')}
+						className={'bg-transparent text-primary text-xl placeholder:text-primary placeholder:text-opacity-70 border border-primary px-4 w-[250px] h-[40px] outline-none transition-colors ' +  (isValidEmail && 'border-green-600')}
 						placeholder='Ваша эл. почта' 
 					/>
 					<button 

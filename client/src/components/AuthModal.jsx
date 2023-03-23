@@ -22,14 +22,14 @@ const AuthModal = ({ visible, setVisible }) => {
 				value={email}
 				onChange={e => setEmail(e.target.value)}
 				placeholder='Ваш электронный адрес...'
-				className='border-b border-primary bg-transparent outline-none w-[50vw] text-xl leading-100% text-primary placeholder:text-primary placeholder:text-opacity-70 pl-5 py-2.5 mb-[5.4vh]'
+				className='border-b border-primary bg-transparent outline-none w-[50vw] text-xl leading-100% text-primary placeholder:text-primary placeholder:text-opacity-70 px-5 py-2.5 mb-[5.4vh]'
 			/>
 			<input
 				value={password}
 				onChange={e => setPassword(e.target.value)}
 				placeholder='Ваш пароль...'
 				type='password'
-				className='border-b border-primary bg-transparent outline-none w-[50vw] text-xl leading-100% text-primary placeholder:text-primary placeholder:text-opacity-70 pl-5 py-2.5 mb-[10.8vh]'
+				className='border-b border-primary bg-transparent outline-none w-[50vw] text-xl leading-100% text-primary placeholder:text-primary placeholder:text-opacity-70 px-5 py-2.5 mb-[10.8vh]'
 			/>
 			<button 
 				onClick={() => store.login(email, password)}

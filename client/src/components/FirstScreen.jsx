@@ -1,23 +1,55 @@
 import React, { useContext, useState } from 'react'
 import firstScreenImg1 from '../assets/firstscreen-img1.webp'
 import firstScreenImg2 from '../assets/firstscreen-img2.webp'
+import firstScreenImg3 from '../assets/firstscreen-img3.webp'
+import firstScreenImg4 from '../assets/firstscreen-img4.webp'
+import firstScreenImg5 from '../assets/firstscreen-img5.webp'
 import Timer from './Timer'
 import MainTitle from './UI/MainTitle'
 import arrow from '../assets/arrow.png'
-import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import { Carousel } from 'react-responsive-carousel'
 import AuthModal from './AuthModal'
 import RegModal from './RegModal'
 import { Context } from '..'
 import { observer } from 'mobx-react-lite'
+import '../../node_modules/slick-carousel/slick/slick.css'
+import '../../node_modules/slick-carousel/slick/slick-theme.css'
+import Slider from 'react-slick'
 
 const FirstScreen = () => {
 	const [isLoginVisible, setIsLoginVisible] = useState(false)
 	const [isRegVisible, setIsRegVisible] = useState(false)
 	const { store } = useContext(Context)
+	const [bgImage, setBgImage] = useState(firstScreenImg1)
+
+	const slides = [
+		{ imageUrl: firstScreenImg1, caption: 'slide1' },
+		{ imageUrl: firstScreenImg2, caption: 'slide2' },
+		{ imageUrl: firstScreenImg3, caption: 'slide3' },
+		{ imageUrl: firstScreenImg4, caption: 'slide4' },
+		{ imageUrl: firstScreenImg5, caption: 'slide5' },
+	]
+
+	const handleBeforeChange = (oldIndex, newIndex) => {
+		const slide = slides[newIndex];
+  	setBgImage(slide.imageUrl);
+	}
+
+	const settings = {
+		autoplay: true,
+		arrows: false,
+		dots: false,
+		infinite: true,
+		speed: 700,
+		beforeChange: handleBeforeChange,
+	}
 
 	return (
-		<div className='bg-firstScreenImg1 pt-[13.7vh] bg-no-repeat bg-top bg-cover bg-opacity-90 h-screen relative flex flex-col'>
+		<div
+			style={{ backgroundImage: `linear-gradient(rgba(21, 9, 10, 0.9), rgba(21, 9, 10, 0.9)),  url(${bgImage})` }}
+			className={
+				'pt-[13.7vh] bg-no-repeat bg-top bg-cover bg-opacity-90 h-screen relative flex flex-col'
+			}
+		>
 			<MainTitle />
 			<div className='w-1/2 h-full flex flex-col justify-between items-center'>
 				<p className='text-tertiary font-OpenSans font-semibold leading-6 text-xl tracking-wide mt-2.5'>
@@ -66,25 +98,17 @@ const FirstScreen = () => {
 				<AuthModal visible={isLoginVisible} setVisible={setIsLoginVisible} />
 				<RegModal visible={isRegVisible} setVisible={setIsRegVisible} />
 			</div>
-			<img
-				src={firstScreenImg1}
-				className={'h-[95vh] absolute left-[50%] bottom-0'}
-			/>
 
-			{/* <Carousel
-				autoPlay={false}
-				infiniteLoop={true}
-				showStatus={false}
-				showIndicators={false}
-				showThumbs={false}
-				showArrows={false}
-				swipeable
-				emulateTouch
-				className='absolute right-0 bottom-0'
+			<Slider
+				{...settings}
+				className={'h-[95vh] w-[calc(95vh*(2/3))] absolute left-[50%] bottom-0'}
 			>
-				<img className='object-contain h-[87.7vh]' src={firstScreenImg1} />
-				<img className='object-contain h-[87.7vh]' src={firstScreenImg2} />
-			</Carousel> */}
+				{slides.map((slide, index) => (
+					<div key={index}>
+						<img className='w-full' src={slide.imageUrl} alt={slide.caption} />
+					</div>
+				))}
+			</Slider>
 		</div>
 	)
 }

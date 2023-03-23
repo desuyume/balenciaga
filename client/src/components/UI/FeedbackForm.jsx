@@ -14,7 +14,7 @@ const FeedbackForm = () => {
 	const isValidMessage = useValidation(message, ValidateMessage)
 
 	return (
-		<form className='bg-secondary w-[650px] h-[600px] flex flex-col items-center ml-[12.2vh]'>
+		<form className='bg-secondary w-[650px] h-[600px] flex flex-col items-center ml-[152px]'>
 			<h2 className='text-primary text-4xl leading-100% font-bold mt-9 tracking-wider mb-15'>СВЯЗАТЬСЯ С НАМИ</h2>
 			<FormInput
 				value={header}
