@@ -17,7 +17,7 @@ const Timeline = () => {
 				2023
 			</p>
 			<img src={timelineImg} className='z-10' />
-			<div ref={timeRef} className='w-[5px] h-5 bg-secondary absolute top-[4px] left-[15px]'>
+			<div ref={timeRef} className='w-[5px] h-5 bg-secondary absolute top-[4px] left-[15px] z-10'>
 			</div>
 		</>
 	)

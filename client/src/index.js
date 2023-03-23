@@ -2,18 +2,22 @@ import React, { createContext } from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
-import Store from './store/store'
+import UserStore from './store/UserStore'
+import CommentStore from './store/CommentStore'
 
-const store = new Store();
+const userStore = new UserStore();
+const commentStore = new CommentStore();
 
 export const Context = createContext({
-	store,
+	userStore,
+	commentStore
 })
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
 	<Context.Provider value={{
-		store
+		userStore,
+		commentStore
 	}}>
 		<App />
 	</Context.Provider>

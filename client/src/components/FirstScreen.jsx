@@ -18,7 +18,7 @@ import Slider from 'react-slick'
 const FirstScreen = () => {
 	const [isLoginVisible, setIsLoginVisible] = useState(false)
 	const [isRegVisible, setIsRegVisible] = useState(false)
-	const { store } = useContext(Context)
+	const { userStore } = useContext(Context)
 	const [bgImage, setBgImage] = useState(firstScreenImg1)
 
 	const slides = [
@@ -30,8 +30,8 @@ const FirstScreen = () => {
 	]
 
 	const handleBeforeChange = (oldIndex, newIndex) => {
-		const slide = slides[newIndex];
-  	setBgImage(slide.imageUrl);
+		const slide = slides[newIndex]
+		setBgImage(slide.imageUrl)
 	}
 
 	const settings = {
@@ -45,7 +45,9 @@ const FirstScreen = () => {
 
 	return (
 		<div
-			style={{ backgroundImage: `linear-gradient(rgba(21, 9, 10, 0.9), rgba(21, 9, 10, 0.9)),  url(${bgImage})` }}
+			style={{
+				backgroundImage: `linear-gradient(rgba(21, 9, 10, 0.9), rgba(21, 9, 10, 0.9)),  url(${bgImage})`,
+			}}
 			className={
 				'pt-[13.7vh] bg-no-repeat bg-top bg-cover bg-opacity-90 h-screen relative flex flex-col'
 			}
@@ -66,13 +68,13 @@ const FirstScreen = () => {
 					</a>
 				</div>
 				<div className='w-full'>
-					{store.isAuth ? (
+					{userStore.isAuth ? (
 						<>
 							<button className='text-tertiary font-OpenSans font-semibold bg-primary bg-opacity-25 hover:bg-opacity-50 hover:text-secondary transition-all py-5 text-3xl w-2/3'>
-								{store.user.name}
+								{userStore.user.name}
 							</button>
 							<button
-								onClick={() => store.logout()}
+								onClick={() => userStore.logout()}
 								className='text-tertiary font-OpenSans font-semibold bg-secondary bg-opacity-25 hover:bg-opacity-50 hover:text-secondary transition-all py-5 text-3xl w-1/3'
 							>
 								Выйти
@@ -101,7 +103,7 @@ const FirstScreen = () => {
 
 			<Slider
 				{...settings}
-				className={'h-[95vh] w-[calc(95vh*(2/3))] absolute left-[50%] bottom-0'}
+				className='h-[95vh] w-[calc(95vh*(2/3))] absolute left-[50%] bottom-0'
 			>
 				{slides.map((slide, index) => (
 					<div key={index}>

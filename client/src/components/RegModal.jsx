@@ -11,13 +11,13 @@ const RegModal = ({ visible, setVisible }) => {
 	const isValidEmail = useValidation(email, ValidateEmail)
 	const [password, setPassword] = useState('')
 	const isValidPassword = useValidation(password, ValidatePassword)
-	const {store} = useContext(Context)
+	const {userStore} = useContext(Context)
 
 	useEffect(() => {
-		if (store.isAuth) {
+		if (userStore.isAuth) {
 			setVisible(false)
 		}
-	}, [store.isAuth])
+	}, [userStore.isAuth])
 
 	return (
 		<Modal visible={visible} setVisible={setVisible}>
@@ -44,7 +44,7 @@ const RegModal = ({ visible, setVisible }) => {
 				className={'border-b bg-transparent outline-none w-[50vw] text-xl leading-100% text-primary placeholder:text-primary placeholder:text-opacity-70 px-5 py-2.5 mb-[5.4vh] transition-colors ' + (isValidPassword ? 'border-green-600' : 'border-primary')}
 			/>
 			<button 
-				onClick={() => store.registration(email, password, name)}
+				onClick={() => userStore.registration(email, password, name)}
 				className='bg-primary text-quaternary text-xl leading-100% py-2.5 px-6'
 			>
 				Зарегистрироваться

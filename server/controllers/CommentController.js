@@ -1,4 +1,4 @@
-const commentService = require('../servers/CommentService')
+const commentService = require('../services/CommentService');
 
 class CommentController {
 	async add(req, res, next) {
@@ -14,7 +14,7 @@ class CommentController {
 
 	async remove(req, res, next) {
 		try {
-			const {id} = req.body;
+			const { id } = req.body;
 			const refreshToken = req.cookies['refreshToken'];
 			const commentData = await commentService.remove(id, refreshToken);
 			return res.json(commentData);
@@ -26,7 +26,7 @@ class CommentController {
 	async getAll(req, res, next) {
 		try {
 			const comments = await commentService.getAll();
-			return res.json(comments)
+			return res.json(comments);
 		} catch (e) {
 			next(e);
 		}
@@ -34,8 +34,17 @@ class CommentController {
 
 	async getOne(req, res, next) {
 		try {
-			
-			return res.json()
+			return res.json();
+		} catch (e) {
+			next(e);
+		}
+	}
+
+	async getRandomCount(req, res, next) {
+		try {
+			const count = req.query.count;
+			const comments = await commentService.getRandomCount(+count);
+			return res.json(comments);
 		} catch (e) {
 			next(e);
 		}

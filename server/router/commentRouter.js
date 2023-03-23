@@ -8,5 +8,6 @@ commentRouter.post('/add', authMiddleware, сommentController.add);
 commentRouter.post('/remove', authMiddleware, сommentController.remove);
 commentRouter.get('/getAll', сommentController.getAll);
 commentRouter.get('/getOne/:id', сommentController.getOne);
+commentRouter.get('/getRandomCount', сommentController.getRandomCount);
 
 module.exports = commentRouter;

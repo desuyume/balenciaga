@@ -11,15 +11,15 @@ import Review from './components/Review'
 import { observer } from 'mobx-react-lite'
 
 function App() {
-	const { store } = useContext(Context)
+	const { userStore } = useContext(Context)
 
 	useEffect(() => {
 		if (localStorage.getItem('token')) {
-			store.checkAuth()
+			userStore.checkAuth()
 		}
 	}, [])
 
-	if (store.isLoading) {
+	if (userStore.isLoading) {
 		return <div>Загрузка...</div>
 	}
 

@@ -10,8 +10,10 @@ import Timeline from './UI/Timeline'
 const Advantages = () => {
 	return (
 		<div className='bg-advantagesBg bg-cover bg-no-repeat bg-center h-screen flex flex-col justify-center items-center relative'>
-			<div className='absolute top-[12vh]'>
+			<div className='absolute top-[12vh] flex flex-col'>
 				<Timeline />
+				<div className='bg-primary h-[20px] w-[837px] bg-opacity-[.45] absolute bottom-[-12px] left-[-84px]'></div>
+				<div className='bg-primary h-[20px] w-[837px] bg-opacity-[.45] absolute top-[-1px] left-[-84px]'></div>
 			</div>
 			<div className='w-[76vw] h-[59.9vh] bg-primary bg-opacity-[.45] flex items-center'>
 				<div className='flex flex-col justify-center h-full'>
@@ -19,7 +21,7 @@ const Advantages = () => {
 					<Advantage img={clothesImg} text='Лучшее качество на рынке' />
 					<Advantage img={dressImg} text='Одежда на любой вкус' />
 				</div>
-				<div className='relative ml-[14.9vw]'>
+				<div className='relative ml-[14.9vw] z-10'>
 					<img src={womanImg} className='h-screen' />
 					<img
 						className='absolute left-[11vw] bottom-[36vh]'
