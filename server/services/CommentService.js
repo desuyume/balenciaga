@@ -1,8 +1,8 @@
 const ApiError = require('../exceptions/ApiError');
 const UserDto = require('../dtos/UserDto');
-const CommentModel = require('../models/CommentModel')
+const CommentModel = require('../models/CommentModel');
 const UserModel = require('../models/UserModel');
-const { getRandomInt } = require('../utils/Random')
+const { getRandomInt } = require('../utils/Random');
 const tokenService = require('./TokenService');
 
 class CommentService {
@@ -22,23 +22,48 @@ class CommentService {
 			throw ApiError.UnauthorizedError();
 		}
 
-		const comment = await CommentModel.create({userId: userData.id, text, date: new Date(), likes: getRandomInt(1, 11), rating})
-		await user.updateOne({$push: {comments: {_id: comment.id}}});
+		const comment = await CommentModel.create({
+			userId: userData.id,
+			text,
+			date: new Date(),
+			likes: getRandomInt(1, 11),
+			rating
+		});
+		await user.updateOne({ $push: { comments: { _id: comment.id } } });
 		await user.save();
-		return {comment, user: userData};
+		return { comment, user: userData };
 	}
 
 	async remove(id, refreshToken) {
 		const userData = tokenService.validateRefreshToken(refreshToken);
 		const comment = await CommentModel.findByIdAndDelete(id);
 		const user = await UserModel.findById(userData.id);
-		await user.updateOne({$pull: {comments: {_id: id}}});
+		await user.updateOne({ $pull: { comments: { _id: id } } });
 		await user.save();
-		return {comment, user: userData};
+		return { comment, user: userData };
 	}
 
 	async getAll() {
-		const comments = await CommentModel.find();
+		const comments = await CommentModel.aggregate()
+			.lookup({
+				from: 'users',
+				localField: 'userId',
+				foreignField: '_id',
+				as: 'user'
+			})
+			.unwind('$user')
+			.project({
+				text: 1,
+				date: 1,
+				likes: 1,
+				rating: 1,
+				userId: '$user._id',
+				userName: '$user.name',
+				userEmail: '$user.email',
+				userImg: '$user.img',
+				userLikedComments: '$user.likedComments'
+			});
+			
 		return comments;
 	}
 
@@ -47,26 +72,28 @@ class CommentService {
 			throw ApiError.BadRequest('Не указано количество комментариев');
 		}
 
-  	const pipeline = [{ $sample: { size: count } }];
-  	let comments = await CommentModel.aggregate(pipeline).lookup({
-			from: 'users',
-			localField: 'userId',
-			foreignField: '_id',
-			as: 'user'
-		}).unwind('$user')
-		.project({
-			text: 1,
-			date: 1,
-			likes: 1,
-			rating: 1,
-			userId: "$user._id",
-			userName: "$user.name",
-			userEmail: "$user.email",
-			userImg: "$user.img",
-			userLikedComments: "$user.likedComments"
-		});
+		const pipeline = [{ $sample: { size: count } }];
+		const comments = await CommentModel.aggregate(pipeline)
+			.lookup({
+				from: 'users',
+				localField: 'userId',
+				foreignField: '_id',
+				as: 'user'
+			})
+			.unwind('$user')
+			.project({
+				text: 1,
+				date: 1,
+				likes: 1,
+				rating: 1,
+				userId: '$user._id',
+				userName: '$user.name',
+				userEmail: '$user.email',
+				userImg: '$user.img',
+				userLikedComments: '$user.likedComments'
+			});
 
-  	return comments;
+		return comments;
 	}
 
 	async likeComment(id, isLiked, refreshToken) {
@@ -75,15 +102,15 @@ class CommentService {
 		const comment = await CommentModel.findById(id);
 		if (!isLiked) {
 			await comment.updateOne({ $inc: { likes: 1 } });
-			await user.updateOne({ $push: { likedComments: comment._id } })
+			await user.updateOne({ $push: { likedComments: comment._id } });
 		} else {
 			await comment.updateOne({ $inc: { likes: -1 } });
-			await user.updateOne({ $pull: { likedComments: comment._id } })
+			await user.updateOne({ $pull: { likedComments: comment._id } });
 		}
 		await user.save();
 		await comment.save();
 		const userDto = new UserDto(user);
-		return {comment, user: userDto};
+		return { comment, user: userDto };
 	}
 }
 

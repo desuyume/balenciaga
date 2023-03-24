@@ -50,12 +50,15 @@ export default class CommentStore {
 	}
 
 	async getAll() {
+		this.setLoading(true);
 		try {
 			const response = await CommentService.getAll();
 			this.setAllComments(response.data)
 			return response;
 		} catch (e) {
 			console.log(e.response.data.message);
+		} finally {
+			this.setLoading(false);
 		}
 	}
 

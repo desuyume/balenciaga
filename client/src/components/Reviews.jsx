@@ -1,16 +1,17 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ReviewCard from './UI/ReviewCard'
 import '../../node_modules/slick-carousel/slick/slick.css'
 import '../../node_modules/slick-carousel/slick/slick-theme.css'
 import Slider from 'react-slick'
 import { Context } from '..'
-import CommentService from '../services/CommentService'
 import { observer } from 'mobx-react-lite'
 import PrevArrowSlider from './UI/PrevArrowSlider'
 import NextArrowSlider from './UI/NextArrowSlider'
+import ReviewsModal from './ReviewsModal'
 
 const Review = () => {
 	const { commentStore } = useContext(Context)
+	const [modalVisible, setModalVisible] = useState(false)
 
 	const settings = {
 		autoplay: false,
@@ -24,7 +25,8 @@ const Review = () => {
 	}
 
 	useEffect(() => {
-		commentStore.getRandomCount(5)
+		commentStore.getRandomCount(5) 
+		commentStore.getAll()
 	}, [])
 
 	if (commentStore._isLoading) {
@@ -48,9 +50,11 @@ const Review = () => {
 							rating={comment.rating}
 							userName={comment.userName}
 							userImg={comment.userImg}
+							setVisible={setModalVisible}
 						/>
 					))}
 			</Slider>
+			<ReviewsModal visible={modalVisible} setVisible={setModalVisible} />
 		</div>
 	)
 }

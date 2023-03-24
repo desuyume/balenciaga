@@ -6,8 +6,10 @@ import likeImg from '../../assets/like-bttn.svg'
 import likeFilledImg from '../../assets/like-bttn-filled.svg'
 import { normalizeDate } from '../../utils/Date'
 import { Context } from '../..'
+import ReviewsModal from '../ReviewsModal'
+import { observer } from 'mobx-react-lite'
 
-const ReviewCard = ({commentId, date, likes, text, rating, userName, userImg}) => {
+const ReviewCard = ({commentId, date, likes, text, rating, userName, userImg, setVisible}) => {
 	const { userStore, commentStore } = useContext(Context);
 	const [isLiked, setIsLiked] = useState(false);
 	const [likesCount, setLikesCount] = useState(likes);
@@ -57,7 +59,7 @@ const ReviewCard = ({commentId, date, likes, text, rating, userName, userImg}) =
 							<img onClick={likeComment} className='mr-1 cursor-pointer' src={isLiked ? likeFilledImg : likeImg} />
 							<p className='text-tertiary font-bold text-sm'>{likesCount}</p>
 						</div>
-						<button className='text-tertiary font-bold text-sm'>Читать полностью</button>
+						<button onClick={() => setVisible(true)} className='text-tertiary font-bold text-sm'>Читать полностью</button>
 					</div>
 				</div>
 			</div>
@@ -65,4 +67,4 @@ const ReviewCard = ({commentId, date, likes, text, rating, userName, userImg}) =
 	)
 }
 
-export default ReviewCard
+export default observer(ReviewCard)

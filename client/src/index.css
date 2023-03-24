@@ -18,14 +18,14 @@ body {
 	background: #15090a;
 }
 
-body::-webkit-scrollbar {
+*::-webkit-scrollbar {
   width: 6px;
 }
 
-body::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
   background: #DDCBCB;
 }
 
-body::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
   background-color: #15090A;
 }

@@ -7,7 +7,7 @@ import FirstScreen from './components/FirstScreen'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import Offer from './components/Offer'
-import Review from './components/Review'
+import Review from './components/Reviews'
 import { observer } from 'mobx-react-lite'
 
 function App() {

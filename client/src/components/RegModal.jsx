@@ -11,7 +11,21 @@ const RegModal = ({ visible, setVisible }) => {
 	const isValidEmail = useValidation(email, ValidateEmail)
 	const [password, setPassword] = useState('')
 	const isValidPassword = useValidation(password, ValidatePassword)
+	const [img, setImg] = useState('')
 	const {userStore} = useContext(Context)
+
+	const clickReg = () => {
+		const formData = new FormData()
+		formData.append('name', name)
+		formData.append('email', email)
+		formData.append('password', password)
+		formData.append('img', img)
+		userStore.registration(formData)
+		setName('')
+		setEmail('')
+		setPassword('')
+		setImg('')
+	}
 
 	useEffect(() => {
 		if (userStore.isAuth) {
@@ -43,8 +57,18 @@ const RegModal = ({ visible, setVisible }) => {
 				type='password'
 				className={'border-b bg-transparent outline-none w-[50vw] text-xl leading-100% text-primary placeholder:text-primary placeholder:text-opacity-70 px-5 py-2.5 mb-[5.4vh] transition-colors ' + (isValidPassword ? 'border-green-600' : 'border-primary')}
 			/>
+			<div className='flex ml-20'>
+				<label className='text-primary pt-0.5 mr-3' htmlFor='avatar'>Выберите свой аватар:</label>
+				<input
+					onChange={e => setImg(e.target.files[0])}
+					id='avatar'
+					type='file'
+					accept='.png, .jpg, .jpeg'
+					className='mb-[5.4vh] text-primary w-fit'
+				/>
+			</div>
 			<button 
-				onClick={() => userStore.registration(email, password, name)}
+				onClick={clickReg}
 				className='bg-primary text-quaternary text-xl leading-100% py-2.5 px-6'
 			>
 				Зарегистрироваться
