@@ -14,10 +14,12 @@ import { observer } from 'mobx-react-lite'
 import '../../node_modules/slick-carousel/slick/slick.css'
 import '../../node_modules/slick-carousel/slick/slick-theme.css'
 import Slider from 'react-slick'
+import ProfileModal from './ProfileModal'
 
 const FirstScreen = () => {
 	const [isLoginVisible, setIsLoginVisible] = useState(false)
 	const [isRegVisible, setIsRegVisible] = useState(false)
+	const [isProfileVisible, setIsProfileVisible] = useState(false)
 	const { userStore } = useContext(Context)
 	const [bgImage, setBgImage] = useState(firstScreenImg1)
 
@@ -70,7 +72,7 @@ const FirstScreen = () => {
 				<div className='w-full'>
 					{userStore.isAuth ? (
 						<>
-							<button className='text-tertiary font-OpenSans font-semibold bg-primary bg-opacity-25 hover:bg-opacity-50 hover:text-secondary transition-all py-5 text-3xl w-2/3'>
+							<button onClick={() => setIsProfileVisible(true)} className='text-tertiary font-OpenSans font-semibold bg-primary bg-opacity-25 hover:bg-opacity-50 hover:text-secondary transition-all py-5 text-3xl w-2/3'>
 								{userStore.user.name}
 							</button>
 							<button
@@ -99,6 +101,7 @@ const FirstScreen = () => {
 				</div>
 				<AuthModal visible={isLoginVisible} setVisible={setIsLoginVisible} />
 				<RegModal visible={isRegVisible} setVisible={setIsRegVisible} />
+				<ProfileModal visible={isProfileVisible} setVisible={setIsProfileVisible} />
 			</div>
 
 			<Slider

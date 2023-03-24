@@ -7,6 +7,12 @@ const AuthModal = ({ visible, setVisible }) => {
 	const [password, setPassword] = useState('')
 	const {userStore} = useContext(Context)
 
+	const clickAuth = () => {
+		userStore.login(email, password)
+		setEmail('')
+		setPassword('')
+	}
+
 	useEffect(() => {
 		if (userStore.isAuth) {
 			setVisible(false)
@@ -32,7 +38,7 @@ const AuthModal = ({ visible, setVisible }) => {
 				className='border-b border-primary bg-transparent outline-none w-[50vw] text-xl leading-100% text-primary placeholder:text-primary placeholder:text-opacity-70 px-5 py-2.5 mb-[10.8vh]'
 			/>
 			<button 
-				onClick={() => userStore.login(email, password)}
+				onClick={clickAuth}
 				className='bg-primary text-quaternary text-xl leading-100% py-2.5 px-24'
 			>
 				Войти
