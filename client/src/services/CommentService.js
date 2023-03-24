@@ -9,15 +9,15 @@ export default class CommentService {
 		return $api.post('/comment/remove', {id})
 	}
 
+	static async likeComment(commentId, isLiked) {
+		return $api.post('/comment/like', {commentId, isLiked})
+	}
+
 	static async getAll() {
 		return $api.get('/comment/getAll')
 	}
 
-	static async getOne() {
-		return $api.get('/comment/getOne')
-	}
-
 	static async getRandomCount(count) {
-		return $api.get(`/comment/getAll?count=${count}`)
+		return $api.get(`/comment/getRandomCount?count=${count}`)
 	}
 }

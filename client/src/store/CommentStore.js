@@ -73,13 +73,20 @@ export default class CommentStore {
 		try {
 			const response = await CommentService.getRandomCount(count);
 			this.setRandomComments(response.data)
-			// console.log(response.data)
-			// console.log(this.getRandomComments())
 			return response;
 		} catch (e) {
 			console.log(e.response.data.message);
 		} finally {
 			this.setLoading(false);
+		}
+	}
+
+	async likeComment(commentId, isLiked) {
+		try {
+			const response = await CommentService.likeComment(commentId, isLiked);
+			return response;
+		} catch (e) {
+			console.log(e.response.data.message);
 		}
 	}
 }

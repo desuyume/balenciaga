@@ -25,7 +25,6 @@ const Review = () => {
 
 	useEffect(() => {
 		commentStore.getRandomCount(5)
-		commentStore.getAll()
 	}, [])
 
 	if (commentStore._isLoading) {
@@ -42,10 +41,13 @@ const Review = () => {
 					commentStore.randomComments.map(comment => (
 						<ReviewCard
 							key={comment._id}
+							commentId={comment._id}
 							date={comment.date}
 							likes={comment.likes}
 							text={comment.text}
-							user={comment.user}
+							rating={comment.rating}
+							userName={comment.userName}
+							userImg={comment.userImg}
 						/>
 					))}
 			</Slider>

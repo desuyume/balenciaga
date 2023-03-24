@@ -1,18 +1,29 @@
-const bcrypt = require('bcrypt');
-const UserDto = require('../dtos/UserDto');
 const ApiError = require('../exceptions/ApiError');
+const UserDto = require('../dtos/UserDto');
 const CommentModel = require('../models/CommentModel')
 const UserModel = require('../models/UserModel');
 const { getRandomInt } = require('../utils/Random')
 const tokenService = require('./TokenService');
-const UserService = require('./UserService')
 
 class CommentService {
-	async add(text, refreshToken) {
+	async add(text, rating, refreshToken) {
+		if (!text || !rating) {
+			throw ApiError.BadRequest('Текст или рейтинг не указаны');
+		}
+
+		if (rating < 1 || rating > 5) {
+			throw ApiError.BadRequest('Рейтинг должен быть от 1 до 5');
+		}
+
 		const userData = tokenService.validateRefreshToken(refreshToken);
 		const user = await UserModel.findById(userData.id);
-		const comment = await CommentModel.create({user: userData.id, text, date: new Date(), likes: getRandomInt(1, 11)})
-		user.comments.push(comment.id);
+
+		if (!userData || !user) {
+			throw ApiError.UnauthorizedError();
+		}
+
+		const comment = await CommentModel.create({userId: userData.id, text, date: new Date(), likes: getRandomInt(1, 11), rating})
+		await user.updateOne({$push: {comments: {_id: comment.id}}});
 		await user.save();
 		return {comment, user: userData};
 	}
@@ -21,7 +32,7 @@ class CommentService {
 		const userData = tokenService.validateRefreshToken(refreshToken);
 		const comment = await CommentModel.findByIdAndDelete(id);
 		const user = await UserModel.findById(userData.id);
-		user.updateOne({$pull: {comments: {_id: id}}});
+		await user.updateOne({$pull: {comments: {_id: id}}});
 		await user.save();
 		return {comment, user: userData};
 	}
@@ -30,10 +41,6 @@ class CommentService {
 		const comments = await CommentModel.find();
 		return comments;
 	}
-	
-	async getOne() {
-		
-	}
 
 	async getRandomCount(count) {
 		if (!count) {
@@ -41,15 +48,42 @@ class CommentService {
 		}
 
   	const pipeline = [{ $sample: { size: count } }];
-  	let comments = await CommentModel.aggregate(pipeline);
+  	let comments = await CommentModel.aggregate(pipeline).lookup({
+			from: 'users',
+			localField: 'userId',
+			foreignField: '_id',
+			as: 'user'
+		}).unwind('$user')
+		.project({
+			text: 1,
+			date: 1,
+			likes: 1,
+			rating: 1,
+			userId: "$user._id",
+			userName: "$user.name",
+			userEmail: "$user.email",
+			userImg: "$user.img",
+			userLikedComments: "$user.likedComments"
+		});
 
-		comments = comments.map(async (comment) => {
-			const userData = await UserService.getById(comment.user);
-			return {comment, user: userData};
-		})
-
-		console.log(comments)
   	return comments;
+	}
+
+	async likeComment(id, isLiked, refreshToken) {
+		const userData = tokenService.validateRefreshToken(refreshToken);
+		const user = await UserModel.findById(userData.id);
+		const comment = await CommentModel.findById(id);
+		if (!isLiked) {
+			await comment.updateOne({ $inc: { likes: 1 } });
+			await user.updateOne({ $push: { likedComments: comment._id } })
+		} else {
+			await comment.updateOne({ $inc: { likes: -1 } });
+			await user.updateOne({ $pull: { likedComments: comment._id } })
+		}
+		await user.save();
+		await comment.save();
+		const userDto = new UserDto(user);
+		return {comment, user: userDto};
 	}
 }
 
