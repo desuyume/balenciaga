@@ -2,6 +2,7 @@ import {makeAutoObservable} from 'mobx'
 import AuthService from '../services/AuthService'
 import axios from 'axios';
 import { API_URL } from '../http'
+import { toast } from 'react-hot-toast'
 
 export default class UserStore {
 	user = {};
@@ -31,7 +32,7 @@ export default class UserStore {
 			this.setAuth(true);
 			this.setUser(response.data.user);
 		} catch (e) {
-			console.log(e.response.data.message);
+			toast.error(e.response.data.message);
 		}
 	}
 
@@ -42,7 +43,7 @@ export default class UserStore {
 			this.setAuth(true);
 			this.setUser(response.data.user);
 		} catch (e) {
-			console.log(e.response.data.message);
+			toast.error(e.response.data.message);
 		}
 	}
 
@@ -53,7 +54,7 @@ export default class UserStore {
 			this.setAuth(false);
 			this.setUser({});
 		} catch (e) {
-			console.log(e.response.data.message);
+			toast.error(e.response.data.message);
 		}
 	}
 
@@ -65,7 +66,7 @@ export default class UserStore {
 			this.setAuth(true);
 			this.setUser(response.data.user);
 		} catch (e) {
-			console.log(e.response.data.message);
+			toast.error(e.response.data.message);
 		} finally {
 			this.setLoading(false);
 		}

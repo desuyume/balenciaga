@@ -8,6 +8,7 @@ import { observer } from 'mobx-react-lite'
 import PrevArrowSlider from './UI/PrevArrowSlider'
 import NextArrowSlider from './UI/NextArrowSlider'
 import ReviewsModal from './ReviewsModal'
+import videoBg from '../assets/videoBg.webm'
 
 const Review = () => {
 	const { commentStore } = useContext(Context)
@@ -31,8 +32,9 @@ const Review = () => {
 	return (
 		<div
 			id='reviews'
-			className='h-screen bg-reviewBg bg-no-repeat bg-center bg-cover flex justify-center items-center'
+			className='h-screen bg-reviewBg bg-no-repeat bg-center bg-cover flex justify-center items-center relative'
 		>
+			<video className='absolute object-cover w-full h-full' src={videoBg} autoPlay loop muted />
 			<Slider {...settings} className='w-[66.6vw] h-[29.1vw] select-auto relative'>
 				{!commentStore._isLoading &&
 					commentStore.randomComments.map(comment => (

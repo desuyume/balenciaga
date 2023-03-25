@@ -1,4 +1,5 @@
 import {makeAutoObservable} from 'mobx'
+import { toast } from 'react-hot-toast'
 import CommentService from '../services/CommentService'
 
 export default class CommentStore {
@@ -33,7 +34,7 @@ export default class CommentStore {
 		try {
 			const response = await CommentService.add(text, rating);
 		} catch (e) {
-			console.log(e.response.data.message);
+			toast.error(e.response.data.message);
 		}
 	}
 
@@ -43,7 +44,7 @@ export default class CommentStore {
 			this._comments = this._comments.filter(comment => comment._id !== id)
 			console.log(response);
 		} catch (e) {
-			console.log(e.response.data.message);
+			toast.error(e.response.data.message);
 		}
 	}
 
@@ -54,7 +55,7 @@ export default class CommentStore {
 			this.setAllComments(response.data)
 			return response;
 		} catch (e) {
-			console.log(e.response.data.message);
+			toast.error(e.response.data.message);
 		} finally {
 			this.setLoading(false);
 		}
@@ -65,7 +66,7 @@ export default class CommentStore {
 			const response = await CommentService.getOne();
 			return response;
 		} catch (e) {
-			console.log(e.response.data.message);
+			toast.error(e.response.data.message);
 		}
 	}
 
@@ -76,7 +77,7 @@ export default class CommentStore {
 			this.setRandomComments(response.data)
 			return response;
 		} catch (e) {
-			console.log(e.response.data.message);
+			toast.error(e.response.data.message);
 		} finally {
 			this.setLoading(false);
 		}
@@ -87,7 +88,7 @@ export default class CommentStore {
 			const response = await CommentService.likeComment(commentId, isLiked);
 			return response;
 		} catch (e) {
-			console.log(e.response.data.message);
+			toast.error(e.response.data.message);
 		}
 	}
 }

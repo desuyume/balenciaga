@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
+import { toast } from 'react-hot-toast'
 import offerBg from '../assets/offer-bg.png'
 import useValidation from '../hooks/useValidation'
 import { ValidateEmail } from '../utils/Validation'
 
-const Offer = ({setNotifVisible, setNotifText}) => {
+const Offer = () => {
 	const [email, setEmail] = useState('')
 	const isValidEmail = useValidation(email, ValidateEmail)
 
 	const clickSubscribe = () => {
-		setNotifText('Вы успешно подписались!')
-		setNotifVisible(true)
+		toast.success('Вы успешно подписались!')
 		setEmail('')
 	}
 

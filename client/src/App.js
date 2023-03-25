@@ -9,18 +9,16 @@ import Header from './components/Header'
 import Offer from './components/Offer'
 import Review from './components/Reviews'
 import { observer } from 'mobx-react-lite'
-import Notification from './components/UI/Notification'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
 	const { userStore, commentStore } = useContext(Context)
-	const [notifVisible, setNotifVisible] = useState(false)
-	const [notifText, setNotifText] = useState('')
 
 	useEffect(() => {
 		if (localStorage.getItem('token')) {
 			userStore.checkAuth()
 		}
-		commentStore.getRandomCount(5) 
+		commentStore.getRandomCount(5)
 		commentStore.getAll()
 	}, [])
 
@@ -31,14 +29,18 @@ function App() {
 	return (
 		<div className='relative'>
 			<Header />
-			<FirstScreen setNotifVisible={setNotifVisible} setNotifText={setNotifText} />
+			<FirstScreen />
 			<About />
-			<Offer setNotifVisible={setNotifVisible} setNotifText={setNotifText} />
+			<Offer />
 			<Advantages />
 			<Review />
-			<Feedback setNotifVisible={setNotifVisible} setNotifText={setNotifText} />
+			<Feedback />
 			<Footer />
-			<Notification visible={notifVisible} setVisible={setNotifVisible} text={notifText} />
+			<Toaster
+				toastOptions={{
+					className: 'bg-primary text-secondary text-center',
+				}}
+			/>
 		</div>
 	)
 }

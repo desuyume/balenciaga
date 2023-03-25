@@ -15,6 +15,7 @@ import '../../node_modules/slick-carousel/slick/slick.css'
 import '../../node_modules/slick-carousel/slick/slick-theme.css'
 import Slider from 'react-slick'
 import ProfileModal from './ProfileModal'
+import { toast } from 'react-hot-toast'
 
 const FirstScreen = ({ setNotifVisible, setNotifText }) => {
 	const [isLoginVisible, setIsLoginVisible] = useState(false)
@@ -25,8 +26,7 @@ const FirstScreen = ({ setNotifVisible, setNotifText }) => {
 
 	const clickLogout = () => {
 		userStore.logout()
-		setNotifText('Вы вышли из аккаунта')
-		setNotifVisible(true)
+		toast.error('Вы вышли из аккаунта')
 	}
 
 	const slides = [
@@ -111,20 +111,14 @@ const FirstScreen = ({ setNotifVisible, setNotifText }) => {
 				<AuthModal
 					visible={isLoginVisible}
 					setVisible={setIsLoginVisible}
-					setNotifVisible={setNotifVisible}
-					setNotifText={setNotifText}
 				/>
 				<RegModal
 					visible={isRegVisible}
 					setVisible={setIsRegVisible}
-					setNotifVisible={setNotifVisible}
-					setNotifText={setNotifText}
 				/>
 				<ProfileModal
 					visible={isProfileVisible}
 					setVisible={setIsProfileVisible}
-					setNotifVisible={setNotifVisible}
-					setNotifText={setNotifText}
 				/>
 			</div>
 

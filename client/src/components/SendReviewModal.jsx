@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import { toast } from 'react-hot-toast'
 import { Context } from '..'
 import useValidation from '../hooks/useValidation'
 import { ValidateMessage, ValidateRating } from '../utils/Validation'
@@ -12,14 +13,14 @@ const SendReviewModal = ({ visible, setVisible }) => {
 	const isValidRating = useValidation(rating, ValidateRating)
 
 	const clickSend = () => {
-		if (userStore.isAuth) {
-			commentStore.add(text, rating)
-			setVisible(false)
-			setText('')
-			setRating('')
-		} else {
-			console.log('нужно авторизоваться');
-		}
+		commentStore.add(text, rating).then(() => {
+			if (userStore.isAuth && text && rating) {
+				toast.success('Отзыв успешно добавлен!')
+				setVisible(false)
+				setText('')
+				setRating('')
+			}
+		})
 	}
 
 	return (
@@ -31,7 +32,10 @@ const SendReviewModal = ({ visible, setVisible }) => {
 				value={text}
 				onChange={e => setText(e.target.value)}
 				placeholder='Ваш отзыв...'
-				className={'border-b bg-transparent outline-none w-[50vw] text-xl leading-100% text-primary placeholder:text-primary placeholder:text-opacity-70 px-5 pt-2.5 pb-12 mb-[5.4vh] resize-none ' + (isValidText ? 'border-green-600' : 'border-primary')}
+				className={
+					'border-b bg-transparent outline-none w-[50vw] text-xl leading-100% text-primary placeholder:text-primary placeholder:text-opacity-70 px-5 pt-2.5 pb-12 mb-[5.4vh] resize-none ' +
+					(isValidText ? 'border-green-600' : 'border-primary')
+				}
 			/>
 			<input
 				value={rating}
@@ -40,9 +44,12 @@ const SendReviewModal = ({ visible, setVisible }) => {
 				type='number'
 				min='1'
 				max='5'
-				className={'border-b bg-transparent outline-none w-[20vw] text-xl leading-100% text-primary placeholder:text-primary placeholder:text-opacity-70 px-5 py-2.5 mb-[10.8vh] ' + (isValidRating ? 'border-green-600' : 'border-primary')}
+				className={
+					'border-b bg-transparent outline-none w-[20vw] text-xl leading-100% text-primary placeholder:text-primary placeholder:text-opacity-70 px-5 py-2.5 mb-[10.8vh] ' +
+					(isValidRating ? 'border-green-600' : 'border-primary')
+				}
 			/>
-			<button 
+			<button
 				onClick={clickSend}
 				className='bg-primary text-quaternary text-xl leading-100% py-2.5 px-24'
 			>

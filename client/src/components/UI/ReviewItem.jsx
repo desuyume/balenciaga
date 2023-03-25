@@ -22,8 +22,8 @@ const ReviewItem = ({commentId, date, likes, text, rating, userName, userImg}) =
 	}
 
 	const likeComment = () => {
+		commentStore.likeComment(commentId, isLiked)
 		if (userStore.isAuth) {
-			commentStore.likeComment(commentId, isLiked)
 			if (isLiked) {
 				setIsLiked(false)
 				setLikesCount(likesCount - 1)
@@ -42,7 +42,7 @@ const ReviewItem = ({commentId, date, likes, text, rating, userName, userImg}) =
 
 	return (
 		<div className='flex px-[50px] mb-10'>
-			<img src={userImg ? process.env.REACT_APP_API_URL + userImg : blankAvatar} className='w-[10vw] mr-5' />
+			<img src={userImg ? process.env.REACT_APP_API_URL + userImg : blankAvatar} className='w-[10vw] h-[140px] object-cover mr-5' />
 			<div className='flex flex-col justify-between w-full'>
 				<div className='flex justify-between pt-[5px]'>
 					<p className='text-primary text-xl font-bold leading-100%'>{userName}</p>

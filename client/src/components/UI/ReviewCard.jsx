@@ -23,8 +23,8 @@ const ReviewCard = ({commentId, date, likes, text, rating, userName, userImg, se
 	}
 
 	const likeComment = () => {
+		commentStore.likeComment(commentId, isLiked)
 		if (userStore.isAuth) {
-			commentStore.likeComment(commentId, isLiked)
 			if (isLiked) {
 				setIsLiked(false)
 				setLikesCount(likesCount - 1)
@@ -43,7 +43,7 @@ const ReviewCard = ({commentId, date, likes, text, rating, userName, userImg, se
 
 	return (
 		<div className='bg-primary w-[66.6vw] h-[29.1vw] flex'>
-			<img className='h-full max-w-[20.8vw]' src={userImg ? process.env.REACT_APP_API_URL + userImg : blankAvatar} />
+			<img className='object-cover max-w-[20.8vw]' src={userImg ? process.env.REACT_APP_API_URL + userImg : blankAvatar} />
 			<div className='w-full flex justify-center'>
 				<div className='w-[33.3vw] flex flex-col justify-evenly'>
 					<div className='flex justify-between items-center'>

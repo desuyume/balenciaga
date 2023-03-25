@@ -7,6 +7,7 @@ import {
 	ValidatePassword,
 } from '../utils/Validation'
 import useValidation from '../hooks/useValidation'
+import { toast } from 'react-hot-toast'
 
 const RegModal = ({ visible, setVisible, setNotifVisible, setNotifText }) => {
 	const [name, setName] = useState('')
@@ -26,15 +27,14 @@ const RegModal = ({ visible, setVisible, setNotifVisible, setNotifText }) => {
 		formData.append('img', img)
 		userStore.registration(formData).then(() => {
 			if (userStore.isAuth) {
-				setNotifText('Вы успешно зарегистрировались!')
-				setNotifVisible(true)
+				toast.success('Вы успешно зарегистрировались!')
 				setVisible(false)
 				setName('')
 				setEmail('')
 				setPassword('')
 				setImg('')
 			}
-		})
+		}).catch(e => toast.error(e.message))
 	}
 
 	return (

@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react'
+import { toast } from 'react-hot-toast'
 import { Context } from '..'
 import Modal from './UI/Modal'
 
-const AuthModal = ({ visible, setVisible, setNotifVisible, setNotifText }) => {
+const AuthModal = ({ visible, setVisible }) => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const { userStore } = useContext(Context)
@@ -10,8 +11,7 @@ const AuthModal = ({ visible, setVisible, setNotifVisible, setNotifText }) => {
 	const clickAuth = () => {
 		userStore.login(email, password).then(() => {
 			if (userStore.isAuth) {
-				setNotifText('Вы вошли в аккаунт!')
-				setNotifVisible(true)
+				toast.success('Вы вошли в аккаунт!')
 				setVisible(false)
 				setEmail('')
 				setPassword('')

@@ -3,7 +3,7 @@ import feedbackImg from '../assets/feedback-img.webp'
 import FeedbackForm from './UI/FeedbackForm'
 import lineImg from '../assets/line-img.svg'
 
-const Feedback = ({ setNotifVisible, setNotifText }) => {
+const Feedback = () => {
 	return (
 		<div
 			id='feedback'
@@ -13,12 +13,15 @@ const Feedback = ({ setNotifVisible, setNotifText }) => {
 				className='top-2.5 right-[calc(50%+84px)] absolute -z-10 pb-6'
 				src={feedbackImg}
 			/>
-			<FeedbackForm
-				setNotifVisible={setNotifVisible}
-				setNotifText={setNotifText}
+			<FeedbackForm />
+			<img
+				className='absolute top-[-16px] right-[calc(50%+610px)]'
+				src={lineImg}
 			/>
-			<img className='absolute top-[-16px] right-[calc(50%+610px)]' src={lineImg} />
-			<img className='absolute top-[-16px] right-[calc(50%+60px)]' src={lineImg} />
+			<img
+				className='absolute top-[-16px] right-[calc(50%+60px)]'
+				src={lineImg}
+			/>
 		</div>
 	)
 }

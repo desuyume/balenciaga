@@ -2,15 +2,15 @@ import React, { useContext } from 'react';
 import Modal from './UI/Modal'
 import blankImg from '../assets/blank-avatar.webp'
 import { Context } from '..'
+import { toast } from 'react-hot-toast'
 
-const ProfileModal = ({ visible, setVisible, setNotifVisible, setNotifText }) => {
+const ProfileModal = ({ visible, setVisible }) => {
 	const { userStore } = useContext(Context)
 
 	const clickLogout = () => {
 		userStore.logout()
 		setVisible(false)
-		setNotifText('Вы вышли из аккаунта')
-		setNotifVisible(true)
+		toast.error('Вы вышли из аккаунта')
 	}
 
 	return (

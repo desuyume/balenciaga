@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { toast } from 'react-hot-toast'
 import useValidation from '../../hooks/useValidation'
 import {
 	ValidateEmail,
@@ -8,7 +9,7 @@ import {
 } from '../../utils/Validation'
 import FormInput from './FormInput'
 
-const FeedbackForm = ({ setNotifVisible, setNotifText }) => {
+const FeedbackForm = () => {
 	const [header, setHeader] = useState('')
 	const isValidHeader = useValidation(header, ValidateHeader)
 	const [name, setName] = useState('')
@@ -23,12 +24,14 @@ const FeedbackForm = ({ setNotifVisible, setNotifText }) => {
 		setName('')
 		setEmail('')
 		setMessage('')
-		setNotifText('Успешно отправлено!')
-		setNotifVisible(true)
+		toast.success('Успешно отправлено!')
 	}
 
 	return (
-		<form onClick={e => e.preventDefault()} className='bg-secondary w-[650px] h-[600px] flex flex-col items-center ml-[152px]'>
+		<form
+			onClick={e => e.preventDefault()}
+			className='bg-secondary w-[650px] h-[600px] flex flex-col items-center ml-[152px]'
+		>
 			<h2 className='text-primary text-4xl leading-100% font-bold mt-9 tracking-wider mb-15'>
 				СВЯЗАТЬСЯ С НАМИ
 			</h2>
