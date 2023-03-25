@@ -19,11 +19,17 @@ export function ValidatePassword(password) {
 export function ValidateMessage(message) {
 	const words = message.split(' ');
 
-	return words.length <= 255 && message;
+	return words.length <= 70 && message;
 }
 
 export function ValidateHeader(header) {
 	const validRegex = /^.{5,50}$/;
 
 	return header.match(validRegex);
+}
+
+export function ValidateRating(rating) {
+	const validRegex = /^[1-5]$/;
+
+	return rating.match(validRegex);
 }

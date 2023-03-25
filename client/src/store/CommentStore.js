@@ -29,11 +29,9 @@ export default class CommentStore {
 		return this.randomComments;
 	}
 
-	async add(text) {
+	async add(text, rating) {
 		try {
-			const response = await CommentService.add(text);
-			this._comments.push(response.data);
-			console.log(response);
+			const response = await CommentService.add(text, rating);
 		} catch (e) {
 			console.log(e.response.data.message);
 		}

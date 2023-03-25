@@ -3,9 +3,15 @@ import offerBg from '../assets/offer-bg.png'
 import useValidation from '../hooks/useValidation'
 import { ValidateEmail } from '../utils/Validation'
 
-const Offer = () => {
+const Offer = ({setNotifVisible, setNotifText}) => {
 	const [email, setEmail] = useState('')
 	const isValidEmail = useValidation(email, ValidateEmail)
+
+	const clickSubscribe = () => {
+		setNotifText('Вы успешно подписались!')
+		setNotifVisible(true)
+		setEmail('')
+	}
 
 	return (
 		<div className='mt-2 relative'>
@@ -27,7 +33,7 @@ const Offer = () => {
 					<p>коллекции.</p>
 				</div>
 			</div>
-			<div className='flex justify-center items-center py-1 bg-secondary absolute bottom-[calc(23vh-56px)] w-full'>
+			<div className='flex justify-center items-center py-1 bg-secondary absolute bottom-[71px] w-full'>
 				<h3 className='text-primary font-Alumni font-bold text-5xl leading-100% tracking-wider mr-56'>ПРИСОЕДИНЯЙСЯ</h3>
 				<div>
 					<input
@@ -37,6 +43,7 @@ const Offer = () => {
 						placeholder='Ваша эл. почта' 
 					/>
 					<button 
+						onClick={clickSubscribe}
 						className='text-quaternary bg-primary text-xl h-[40px] px-3.5 disabled:opacity-90 transition-opacity'
 						disabled={!isValidEmail}
 					>ПОДПИСАТЬСЯ</button>

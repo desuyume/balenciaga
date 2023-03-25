@@ -1,11 +1,17 @@
 import { observer } from 'mobx-react-lite'
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '..'
+import SendReviewModal from './SendReviewModal'
 import Modal from './UI/Modal'
 import ReviewItem from './UI/ReviewItem'
 
 const ReviewsModal = ({ visible, setVisible }) => {
 	const { commentStore } = useContext(Context)
+	const [sendReviewVisible, setSendReviewVisible] = useState(false)
+
+	if (sendReviewVisible) {
+		return <SendReviewModal visible={sendReviewVisible} setVisible={setSendReviewVisible} />
+	}
 
 	return (
 		<Modal visible={visible} setVisible={setVisible}>
@@ -26,7 +32,10 @@ const ReviewsModal = ({ visible, setVisible }) => {
 					)
 				}
 			</div>
-			<button className='text-primary text-sm leading-100% font-bold absolute bottom-[10px] right-[20px]'>Оставить свой отзыв</button>
+			<button
+			 className='text-primary text-sm leading-100% font-bold absolute bottom-[10px] right-[20px]'
+			 onClick={() => setSendReviewVisible(true)}
+			>Оставить свой отзыв</button>
 		</Modal>
 	);
 };

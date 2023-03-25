@@ -27,9 +27,11 @@ const ReviewItem = ({commentId, date, likes, text, rating, userName, userImg}) =
 			if (isLiked) {
 				setIsLiked(false)
 				setLikesCount(likesCount - 1)
+				userStore.user.likedComments = userStore.user.likedComments.filter(comment => comment != commentId)
 			} else {
 				setIsLiked(true)
 				setLikesCount(likesCount + 1)
+				userStore.user.likedComments.push(commentId)
 			}
 		}
 	}
@@ -41,7 +43,7 @@ const ReviewItem = ({commentId, date, likes, text, rating, userName, userImg}) =
 	return (
 		<div className='flex px-[50px] mb-10'>
 			<img src={userImg ? process.env.REACT_APP_API_URL + userImg : blankAvatar} className='w-[10vw] mr-5' />
-			<div className='flex flex-col justify-between'>
+			<div className='flex flex-col justify-between w-full'>
 				<div className='flex justify-between pt-[5px]'>
 					<p className='text-primary text-xl font-bold leading-100%'>{userName}</p>
 					<p className='leading-100% text-primary'>{normalizeDate(date)}</p>

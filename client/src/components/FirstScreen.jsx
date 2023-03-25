@@ -16,12 +16,18 @@ import '../../node_modules/slick-carousel/slick/slick-theme.css'
 import Slider from 'react-slick'
 import ProfileModal from './ProfileModal'
 
-const FirstScreen = () => {
+const FirstScreen = ({ setNotifVisible, setNotifText }) => {
 	const [isLoginVisible, setIsLoginVisible] = useState(false)
 	const [isRegVisible, setIsRegVisible] = useState(false)
 	const [isProfileVisible, setIsProfileVisible] = useState(false)
 	const { userStore } = useContext(Context)
 	const [bgImage, setBgImage] = useState(firstScreenImg1)
+
+	const clickLogout = () => {
+		userStore.logout()
+		setNotifText('Вы вышли из аккаунта')
+		setNotifVisible(true)
+	}
 
 	const slides = [
 		{ imageUrl: firstScreenImg1, caption: 'slide1' },
@@ -51,7 +57,7 @@ const FirstScreen = () => {
 				backgroundImage: `linear-gradient(rgba(21, 9, 10, 0.9), rgba(21, 9, 10, 0.9)),  url(${bgImage})`,
 			}}
 			className={
-				'pt-[13.7vh] bg-no-repeat bg-top bg-cover bg-opacity-90 h-screen relative flex flex-col'
+				'pt-[13.7vh] bg-no-repeat bg-cover bg-opacity-90 h-screen relative flex flex-col'
 			}
 		>
 			<MainTitle />
@@ -72,11 +78,14 @@ const FirstScreen = () => {
 				<div className='w-full'>
 					{userStore.isAuth ? (
 						<>
-							<button onClick={() => setIsProfileVisible(true)} className='text-tertiary font-OpenSans font-semibold bg-primary bg-opacity-25 hover:bg-opacity-50 hover:text-secondary transition-all py-5 text-3xl w-2/3'>
+							<button
+								onClick={() => setIsProfileVisible(true)}
+								className='text-tertiary font-OpenSans font-semibold bg-primary bg-opacity-25 hover:bg-opacity-50 hover:text-secondary transition-all py-5 text-3xl w-2/3'
+							>
 								{userStore.user.name}
 							</button>
 							<button
-								onClick={() => userStore.logout()}
+								onClick={clickLogout}
 								className='text-tertiary font-OpenSans font-semibold bg-secondary bg-opacity-25 hover:bg-opacity-50 hover:text-secondary transition-all py-5 text-3xl w-1/3'
 							>
 								Выйти
@@ -99,9 +108,24 @@ const FirstScreen = () => {
 						</>
 					)}
 				</div>
-				<AuthModal visible={isLoginVisible} setVisible={setIsLoginVisible} />
-				<RegModal visible={isRegVisible} setVisible={setIsRegVisible} />
-				<ProfileModal visible={isProfileVisible} setVisible={setIsProfileVisible} />
+				<AuthModal
+					visible={isLoginVisible}
+					setVisible={setIsLoginVisible}
+					setNotifVisible={setNotifVisible}
+					setNotifText={setNotifText}
+				/>
+				<RegModal
+					visible={isRegVisible}
+					setVisible={setIsRegVisible}
+					setNotifVisible={setNotifVisible}
+					setNotifText={setNotifText}
+				/>
+				<ProfileModal
+					visible={isProfileVisible}
+					setVisible={setIsProfileVisible}
+					setNotifVisible={setNotifVisible}
+					setNotifText={setNotifText}
+				/>
 			</div>
 
 			<Slider

@@ -28,9 +28,11 @@ const ReviewCard = ({commentId, date, likes, text, rating, userName, userImg, se
 			if (isLiked) {
 				setIsLiked(false)
 				setLikesCount(likesCount - 1)
+				userStore.user.likedComments = userStore.user.likedComments.filter(comment => comment != commentId)
 			} else {
 				setIsLiked(true)
 				setLikesCount(likesCount + 1)
+				userStore.user.likedComments.push(commentId)
 			}
 		}
 	}

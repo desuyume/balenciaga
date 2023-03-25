@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
 import useValidation from '../../hooks/useValidation'
-import { ValidateEmail, ValidateHeader, ValidateMessage, ValidateName } from '../../utils/Validation'
+import {
+	ValidateEmail,
+	ValidateHeader,
+	ValidateMessage,
+	ValidateName,
+} from '../../utils/Validation'
 import FormInput from './FormInput'
 
-const FeedbackForm = () => {
+const FeedbackForm = ({ setNotifVisible, setNotifText }) => {
 	const [header, setHeader] = useState('')
 	const isValidHeader = useValidation(header, ValidateHeader)
 	const [name, setName] = useState('')
@@ -13,9 +18,20 @@ const FeedbackForm = () => {
 	const [message, setMessage] = useState('')
 	const isValidMessage = useValidation(message, ValidateMessage)
 
+	const clickSend = () => {
+		setHeader('')
+		setName('')
+		setEmail('')
+		setMessage('')
+		setNotifText('Успешно отправлено!')
+		setNotifVisible(true)
+	}
+
 	return (
-		<form className='bg-secondary w-[650px] h-[600px] flex flex-col items-center ml-[152px]'>
-			<h2 className='text-primary text-4xl leading-100% font-bold mt-9 tracking-wider mb-15'>СВЯЗАТЬСЯ С НАМИ</h2>
+		<form onClick={e => e.preventDefault()} className='bg-secondary w-[650px] h-[600px] flex flex-col items-center ml-[152px]'>
+			<h2 className='text-primary text-4xl leading-100% font-bold mt-9 tracking-wider mb-15'>
+				СВЯЗАТЬСЯ С НАМИ
+			</h2>
 			<FormInput
 				value={header}
 				onChange={e => setHeader(e.target.value)}
@@ -38,12 +54,20 @@ const FeedbackForm = () => {
 				value={message}
 				onChange={e => setMessage(e.target.value)}
 				placeholder='Сообщение...'
-				className={'resize-none outline-none border bg-transparent w-[400px] h-[100px] mt-4 text-xl text-primary placeholder:text-primary placeholder:text-opacity-70 px-5 pt-2.5 transition-colors ' + (isValidMessage ? 'border-green-600' : 'border-primary')}
+				className={
+					'resize-none outline-none border bg-transparent w-[400px] h-[100px] mt-4 text-xl text-primary placeholder:text-primary placeholder:text-opacity-70 px-5 pt-2.5 transition-colors ' +
+					(isValidMessage ? 'border-green-600' : 'border-primary')
+				}
 			/>
-			<button 
+			<button
+				onClick={clickSend}
 				className='bg-primary text-quaternary text-xl px-16 py-1.5 mt-11 disabled:opacity-90 transition-opacity'
-				disabled={!(isValidHeader && isValidName && isValidEmail && isValidMessage)}
-			>ОТПРАВИТЬ</button>
+				disabled={
+					!(isValidHeader && isValidName && isValidEmail && isValidMessage)
+				}
+			>
+				ОТПРАВИТЬ
+			</button>
 		</form>
 	)
 }

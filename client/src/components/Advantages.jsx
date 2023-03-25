@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Advantage from './UI/Advantage'
 import dressImg from '../assets/dress.webp'
 import carImg from '../assets/car.webp'

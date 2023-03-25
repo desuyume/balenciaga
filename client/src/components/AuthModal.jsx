@@ -1,23 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Context } from '..'
 import Modal from './UI/Modal'
 
-const AuthModal = ({ visible, setVisible }) => {
+const AuthModal = ({ visible, setVisible, setNotifVisible, setNotifText }) => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-	const {userStore} = useContext(Context)
+	const { userStore } = useContext(Context)
 
 	const clickAuth = () => {
-		userStore.login(email, password)
-		setEmail('')
-		setPassword('')
+		userStore.login(email, password).then(() => {
+			if (userStore.isAuth) {
+				setNotifText('Вы вошли в аккаунт!')
+				setNotifVisible(true)
+				setVisible(false)
+				setEmail('')
+				setPassword('')
+			}
+		})
 	}
-
-	useEffect(() => {
-		if (userStore.isAuth) {
-			setVisible(false)
-		}
-	}, [userStore.isAuth])
 
 	return (
 		<Modal visible={visible} setVisible={setVisible}>
@@ -37,7 +37,7 @@ const AuthModal = ({ visible, setVisible }) => {
 				type='password'
 				className='border-b border-primary bg-transparent outline-none w-[50vw] text-xl leading-100% text-primary placeholder:text-primary placeholder:text-opacity-70 px-5 py-2.5 mb-[10.8vh]'
 			/>
-			<button 
+			<button
 				onClick={clickAuth}
 				className='bg-primary text-quaternary text-xl leading-100% py-2.5 px-24'
 			>

@@ -3,12 +3,14 @@ import Modal from './UI/Modal'
 import blankImg from '../assets/blank-avatar.webp'
 import { Context } from '..'
 
-const ProfileModal = ({ visible, setVisible }) => {
+const ProfileModal = ({ visible, setVisible, setNotifVisible, setNotifText }) => {
 	const { userStore } = useContext(Context)
 
 	const clickLogout = () => {
 		userStore.logout()
 		setVisible(false)
+		setNotifText('Вы вышли из аккаунта')
+		setNotifVisible(true)
 	}
 
 	return (

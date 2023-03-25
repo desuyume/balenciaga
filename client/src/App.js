@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Context } from '.'
 import About from './components/About'
 import Advantages from './components/Advantages'
@@ -9,14 +9,19 @@ import Header from './components/Header'
 import Offer from './components/Offer'
 import Review from './components/Reviews'
 import { observer } from 'mobx-react-lite'
+import Notification from './components/UI/Notification'
 
 function App() {
-	const { userStore } = useContext(Context)
+	const { userStore, commentStore } = useContext(Context)
+	const [notifVisible, setNotifVisible] = useState(false)
+	const [notifText, setNotifText] = useState('')
 
 	useEffect(() => {
 		if (localStorage.getItem('token')) {
 			userStore.checkAuth()
 		}
+		commentStore.getRandomCount(5) 
+		commentStore.getAll()
 	}, [])
 
 	if (userStore.isLoading) {
@@ -24,15 +29,16 @@ function App() {
 	}
 
 	return (
-		<div>
+		<div className='relative'>
 			<Header />
-			<FirstScreen />
+			<FirstScreen setNotifVisible={setNotifVisible} setNotifText={setNotifText} />
 			<About />
-			<Offer />
+			<Offer setNotifVisible={setNotifVisible} setNotifText={setNotifText} />
 			<Advantages />
 			<Review />
-			<Feedback />
+			<Feedback setNotifVisible={setNotifVisible} setNotifText={setNotifText} />
 			<Footer />
+			<Notification visible={notifVisible} setVisible={setNotifVisible} text={notifText} />
 		</div>
 	)
 }

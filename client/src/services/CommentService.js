@@ -1,8 +1,8 @@
 import $api from '../http'
 
 export default class CommentService {
-	static async add(text) {
-		return $api.post('/comment/add', {text})
+	static async add(text, rating) {
+		return $api.post('/comment/add', {text, rating})
 	}
 
 	static async remove(id) {

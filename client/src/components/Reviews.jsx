@@ -24,11 +24,6 @@ const Review = () => {
 		nextArrow: <NextArrowSlider />,
 	}
 
-	useEffect(() => {
-		commentStore.getRandomCount(5) 
-		commentStore.getAll()
-	}, [])
-
 	if (commentStore._isLoading) {
 		return <div>Загрузка...</div>
 	}
