@@ -34,7 +34,7 @@ const Timer = () => {
 					<p className='text-base font-normal tracking-normal'>секунд</p>
 				</div>
 			</div>
-			<button className='bg-primary border-2 border-quaternary text-quaternary text-xl font-bold tracking-wide px-6 py-1 mt-5'>
+			<button className='bg-primary border-2 border-quaternary text-quaternary text-xl font-bold tracking-wide px-6 py-1 mt-5 hover:border-primary hover:text-primary hover:bg-quaternary transition-all'>
 				ПОСМОТРЕТЬ
 			</button>
 		</div>

@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import blankAvatar from '../../assets/blank-avatar.webp'
-import star from '../../assets/star.svg'
-import starFilled from '../../assets/star-filled.svg'
 import likeImg from '../../assets/like-bttn.svg'
 import likeFilledImg from '../../assets/like-bttn-filled.svg'
 import { normalizeDate } from '../../utils/Date'
 import { Context } from '../..'
-import ReviewsModal from '../ReviewsModal'
 import { observer } from 'mobx-react-lite'
+import RatingStars from './RatingStars'
 
 const ReviewCard = ({commentId, date, likes, text, rating, userName, userImg, setVisible}) => {
 	const { userStore, commentStore } = useContext(Context);
@@ -53,9 +51,7 @@ const ReviewCard = ({commentId, date, likes, text, rating, userName, userImg, se
 					<p className='text-secondary leading-100%'>
 						{text}
 					</p>
-					<div className='flex items-center text-secondary'>
-						{rating} <img className='ml-2' src={starFilled} />
-					</div>
+					<RatingStars commentId={commentId} rating={rating} isPrimaryColor={false} />
 					<div className='flex justify-between'>
 						<div className='flex items-center'>
 							<img onClick={likeComment} className='mr-1 cursor-pointer' src={isLiked ? likeFilledImg : likeImg} />

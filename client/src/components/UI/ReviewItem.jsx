@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import blankAvatar from '../../assets/blank-avatar.webp'
-import likeImg from '../../assets/like-bttn.svg'
-import likeFilledImg from '../../assets/like-bttn-filled.svg'
-import starImg from '../../assets/star-modal.svg'
-import starFilledImg from '../../assets/star-filled-modal.svg'
+import likeImg from '../../assets/like-bttn-item.svg'
+import likeFilledImg from '../../assets/like-bttn-item-filled.svg'
 import { normalizeDate } from '../../utils/Date'
 import { Context } from '../..'
 import { observer } from 'mobx-react-lite'
+import RatingStars from './RatingStars'
 
 const ReviewItem = ({commentId, date, likes, text, rating, userName, userImg}) => {
 	const { userStore, commentStore } = useContext(Context);
@@ -41,7 +40,7 @@ const ReviewItem = ({commentId, date, likes, text, rating, userName, userImg}) =
 	}, [])
 
 	return (
-		<div className='flex px-[50px] mb-10'>
+		<div className='flex px-[40px] mb-10 pb-10 last:mb-0 border-b border-primary'>
 			<img src={userImg ? process.env.REACT_APP_API_URL + userImg : blankAvatar} className='w-[10vw] h-[140px] object-cover mr-5' />
 			<div className='flex flex-col justify-between w-full'>
 				<div className='flex justify-between pt-[5px]'>
@@ -52,12 +51,9 @@ const ReviewItem = ({commentId, date, likes, text, rating, userName, userImg}) =
 				<div className='flex justify-between mt-2.5'>
 					<div className='flex items-center'>
 						<img onClick={likeComment} className='cursor-pointer' src={isLiked ? likeFilledImg : likeImg} />
-						<p className='text-tertiary text-sm leading-100% font-bold ml-[3px]'>{likesCount}</p>
+						<p className='text-primary text-sm leading-100% font-bold ml-[3px]'>{likesCount}</p>
 					</div>
-					<div className='flex items-center'>
-						<img className='mr-[3px]' src={starFilledImg} />
-						<p className='text-primary'>{rating}</p>
-					</div>
+					<RatingStars commentId={commentId} rating={rating} isPrimaryColor={true} />
 				</div>
 			</div>			
 		</div>
