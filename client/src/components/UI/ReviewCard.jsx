@@ -57,7 +57,7 @@ const ReviewCard = ({commentId, date, likes, text, rating, userName, userImg, se
 							<img onClick={likeComment} className='mr-1 cursor-pointer' src={isLiked ? likeFilledImg : likeImg} />
 							<p className='text-tertiary font-bold text-sm'>{likesCount}</p>
 						</div>
-						<button onClick={() => setVisible(true)} className='text-tertiary font-bold text-sm'>Читать полностью</button>
+						<button onClick={() => setVisible(true)} className='text-tertiary font-bold text-sm'>Все отзывы</button>
 					</div>
 				</div>
 			</div>

@@ -40,7 +40,7 @@ const ReviewItem = ({commentId, date, likes, text, rating, userName, userImg}) =
 	}, [])
 
 	return (
-		<div className='flex px-[40px] mb-10 pb-10 last:mb-0 border-b border-primary'>
+		<div className='flex px-[40px] mb-10 pb-10 last:mb-0 border-b border-primary last:border-b-0'>
 			<img src={userImg ? process.env.REACT_APP_API_URL + userImg : blankAvatar} className='w-[10vw] h-[140px] object-cover mr-5' />
 			<div className='flex flex-col justify-between w-full'>
 				<div className='flex justify-between pt-[5px]'>

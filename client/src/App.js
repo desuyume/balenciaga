@@ -10,6 +10,7 @@ import Offer from './components/Offer'
 import Review from './components/Reviews'
 import { observer } from 'mobx-react-lite'
 import { Toaster } from 'react-hot-toast'
+import Loader from './components/UI/Loader/Loader'
 
 function App() {
 	const { userStore, commentStore } = useContext(Context)
@@ -23,7 +24,11 @@ function App() {
 	}, [])
 
 	if (userStore.isLoading) {
-		return <div>Загрузка...</div>
+		return (
+			<div className='w-screen h-screen flex justify-center items-center'>
+				<Loader />
+			</div>
+		)
 	}
 
 	return (

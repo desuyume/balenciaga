@@ -11,7 +11,7 @@ export function ValidateName(name) {
 }
 
 export function ValidatePassword(password) {
-	const validRegex = /^.{3,32}$/;
+	const validRegex = /^[0-9a-zA-Z!@#$%^&*]{3,32}$/;
 
 	return password.match(validRegex);
 }
