@@ -38,16 +38,6 @@ export default class CommentStore {
 		}
 	}
 
-	async remove(id) {
-		try {
-			const response = await CommentService.remove(id);
-			this._comments = this._comments.filter(comment => comment._id !== id)
-			console.log(response);
-		} catch (e) {
-			toast.error(e.response.data.message);
-		}
-	}
-
 	async getAll() {
 		this.setLoading(true);
 		try {

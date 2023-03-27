@@ -12,17 +12,6 @@ class CommentController {
 		}
 	}
 
-	async remove(req, res, next) {
-		try {
-			const { id } = req.body;
-			const refreshToken = req.cookies['refreshToken'];
-			const commentData = await commentService.remove(id, refreshToken);
-			return res.json(commentData);
-		} catch (e) {
-			next(e);
-		}
-	}
-
 	async getAll(req, res, next) {
 		try {
 			const comments = await commentService.getAll();

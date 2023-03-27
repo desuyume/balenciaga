@@ -5,10 +5,6 @@ export default class CommentService {
 		return $api.post('/comment/add', {text, rating})
 	}
 
-	static async remove(id) {
-		return $api.post('/comment/remove', {id})
-	}
-
 	static async likeComment(commentId, isLiked) {
 		return $api.post('/comment/like', {commentId, isLiked})
 	}

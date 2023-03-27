@@ -72,17 +72,6 @@ class UserService {
 
 		return { ...tokens, user: userDto };
 	}
-
-	async getById(id) {
-		const user = await UserModel.findById(id);
-
-		if (!user) {
-			throw ApiError.BadRequest('Пользователя с таким ID не существует');
-		}
-
-		const userDto = new UserDto(user);
-		return userDto;
-	}
 }
 
 module.exports = new UserService();
