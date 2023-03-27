@@ -63,7 +63,7 @@ class CommentService {
 				userImg: '$user.img',
 				userLikedComments: '$user.likedComments'
 			});
-			
+
 		return comments;
 	}
 
@@ -98,14 +98,38 @@ class CommentService {
 
 	async likeComment(id, isLiked, refreshToken) {
 		const userData = tokenService.validateRefreshToken(refreshToken);
-		const user = await UserModel.findById(userData.id);
-		const comment = await CommentModel.findById(id);
+		let comment;
+		let user;
 		if (!isLiked) {
-			await comment.updateOne({ $inc: { likes: 1 } });
-			await user.updateOne({ $push: { likedComments: comment._id } });
+			comment = await CommentModel.findOneAndUpdate(
+				{ _id: id },
+				{ $inc: { likes: 1 } },
+				{
+					new: true
+				}
+			);
+			user = await UserModel.findOneAndUpdate(
+				{ _id: userData.id },
+				{ $push: { likedComments: comment._id } },
+				{
+					new: true
+				}
+			);
 		} else {
-			await comment.updateOne({ $inc: { likes: -1 } });
-			await user.updateOne({ $pull: { likedComments: comment._id } });
+			comment = await CommentModel.findOneAndUpdate(
+				{ _id: id },
+				{ $inc: { likes: -1 } },
+				{
+					new: true
+				}
+			);
+			user = await UserModel.findOneAndUpdate(
+				{ _id: userData.id },
+				{ $pull: { likedComments: comment._id } },
+				{
+					new: true
+				}
+			);
 		}
 		await user.save();
 		await comment.save();

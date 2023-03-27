@@ -18,7 +18,7 @@ const SendReviewModal = ({ visible, setVisible }) => {
 
 	const clickSend = () => {
 		commentStore.add(text, rating).then(() => {
-			if (userStore.isAuth && text && rating) {
+			if (userStore.isAuth && isValidRating && isValidText) {
 				toast.success('Отзыв успешно добавлен!')
 				setVisible(false)
 				setText('')

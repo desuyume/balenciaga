@@ -9,10 +9,13 @@ import PrevArrowSlider from './UI/PrevArrowSlider'
 import NextArrowSlider from './UI/NextArrowSlider'
 import ReviewsModal from './ReviewsModal'
 import videoBg from '../assets/videoBg.webm'
+import Loader from './UI/Loader/Loader'
 
 const Review = () => {
 	const { commentStore } = useContext(Context)
 	const [modalVisible, setModalVisible] = useState(false)
+	const [commentChanged, setCommentChanged] = useState('')
+	const [newLikesCount, setNewLikesCount] = useState(0)
 
 	const settings = {
 		autoplay: false,
@@ -26,7 +29,11 @@ const Review = () => {
 	}
 
 	if (commentStore._isLoading) {
-		return <div>Загрузка...</div>
+		return (
+			<div>
+				<Loader />
+			</div>
+		)
 	}
 
 	return (
@@ -34,24 +41,46 @@ const Review = () => {
 			id='reviews'
 			className='h-screen bg-reviewBg bg-no-repeat bg-center bg-cover flex justify-center items-center relative'
 		>
-			<video className='absolute object-cover w-full h-full' src={videoBg} autoPlay loop muted />
-			<Slider {...settings} className='w-[66.6vw] h-[29.1vw] select-auto relative'>
+			<video
+				className='absolute object-cover w-full h-full'
+				src={videoBg}
+				autoPlay
+				loop
+				muted
+			/>
+			<Slider
+				{...settings}
+				className='w-[66.6vw] h-[29.1vw] select-auto relative'
+			>
 				{!commentStore._isLoading &&
-					commentStore.randomComments.map(comment => (
-						<ReviewCard
-							key={comment._id}
-							commentId={comment._id}
-							date={comment.date}
-							likes={comment.likes}
-							text={comment.text}
-							rating={comment.rating}
-							userName={comment.userName}
-							userImg={comment.userImg}
-							setVisible={setModalVisible}
-						/>
-					))}
+					commentStore
+						.getRandomComments()
+						.map(comment => (
+							<ReviewCard
+								key={comment._id}
+								commentId={comment._id}
+								date={comment.date}
+								likes={comment.likes}
+								text={comment.text}
+								rating={comment.rating}
+								userName={comment.userName}
+								userImg={comment.userImg}
+								setVisible={setModalVisible}
+								commentChanged={commentChanged}
+								setCommentChanged={setCommentChanged}
+								newLikesCount={newLikesCount}
+								setNewLikesCount={setNewLikesCount}
+							/>
+						))}
 			</Slider>
-			<ReviewsModal visible={modalVisible} setVisible={setModalVisible} />
+			<ReviewsModal
+				visible={modalVisible}
+				setVisible={setModalVisible}
+				commentChanged={commentChanged}
+				setCommentChanged={setCommentChanged}
+				newLikesCount={newLikesCount}
+				setNewLikesCount={setNewLikesCount}
+			/>
 		</div>
 	)
 }

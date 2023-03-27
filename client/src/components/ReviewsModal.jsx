@@ -5,7 +5,7 @@ import SendReviewModal from './SendReviewModal'
 import Modal from './UI/Modal'
 import ReviewItem from './UI/ReviewItem'
 
-const ReviewsModal = ({ visible, setVisible }) => {
+const ReviewsModal = ({ visible, setVisible, commentChanged, setCommentChanged, newLikesCount, setNewLikesCount }) => {
 	const { commentStore } = useContext(Context)
 	const [sendReviewVisible, setSendReviewVisible] = useState(false)
 
@@ -28,6 +28,10 @@ const ReviewsModal = ({ visible, setVisible }) => {
 							rating={comment.rating}
 							userName={comment.userName}
 							userImg={comment.userImg}
+							commentChanged={commentChanged}
+							setCommentChanged={setCommentChanged}
+							newLikesCount={newLikesCount}
+							setNewLikesCount={setNewLikesCount}
 						/>	
 					)
 				}

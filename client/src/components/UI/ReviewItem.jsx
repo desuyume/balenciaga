@@ -7,7 +7,7 @@ import { Context } from '../..'
 import { observer } from 'mobx-react-lite'
 import RatingStars from './RatingStars'
 
-const ReviewItem = ({commentId, date, likes, text, rating, userName, userImg}) => {
+const ReviewItem = ({commentId, date, likes, text, rating, userName, userImg, commentChanged, setCommentChanged, newLikesCount, setNewLikesCount}) => {
 	const { userStore, commentStore } = useContext(Context);
 	const [isLiked, setIsLiked] = useState(false);
 	const [likesCount, setLikesCount] = useState(likes);
@@ -16,28 +16,40 @@ const ReviewItem = ({commentId, date, likes, text, rating, userName, userImg}) =
 		if (userStore.isAuth) {
 			if (userStore.user.likedComments.includes(commentId)) {
 				setIsLiked(true);
+			} else {
+				setIsLiked(false);
 			}
 		}
 	}
 
 	const likeComment = () => {
 		commentStore.likeComment(commentId, isLiked)
+		setCommentChanged(commentId)
 		if (userStore.isAuth) {
 			if (isLiked) {
 				setIsLiked(false)
 				setLikesCount(likesCount - 1)
-				userStore.user.likedComments = userStore.user.likedComments.filter(comment => comment != commentId)
+				setNewLikesCount(likesCount - 1)
+				userStore.setUser({...userStore.user, likedComments: [...userStore.user.likedComments.filter(comment => comment != commentId)]})
 			} else {
 				setIsLiked(true)
 				setLikesCount(likesCount + 1)
-				userStore.user.likedComments.push(commentId)
+				setNewLikesCount(likesCount+1)
+				userStore.setUser({...userStore.user, likedComments: [...userStore.user.likedComments, commentId]})
 			}
 		}
 	}
 
 	useEffect(() => {
 		checkLike();
-	}, [])
+	}, [userStore.user.likedComments])
+
+	useEffect(() => {
+		if (commentId === commentChanged) {
+			setLikesCount(newLikesCount)
+			console.log(newLikesCount);
+		}
+	}, [commentChanged, newLikesCount])
 
 	return (
 		<div className='flex px-[40px] mb-10 pb-10 last:mb-0 border-b border-primary last:border-b-0'>
