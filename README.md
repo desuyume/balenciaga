@@ -1,6 +1,6 @@
 # Balenciaga
 
-Balenciaga's clothing brand brand lending / term paper for college
+Balenciaga's clothing brand lending / term paper for college
 
 ## Stack
 
