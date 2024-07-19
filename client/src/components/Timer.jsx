@@ -2,7 +2,7 @@ import React from 'react'
 import useTimer from '../hooks/useTimer'
 
 const Timer = () => {
-	const { days, hours, minutes, seconds } = useTimer('2023-12-31T00:00:00')
+	const { days, hours, minutes, seconds } = useTimer('2030-12-31T00:00:00')
 
 	const formatDate = time => {
 		return time < 10 ? `0${time}` : time

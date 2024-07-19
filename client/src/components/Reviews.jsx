@@ -10,12 +10,14 @@ import NextArrowSlider from './UI/NextArrowSlider'
 import ReviewsModal from './ReviewsModal'
 import videoBg from '../assets/videoBg.webm'
 import Loader from './UI/Loader/Loader'
+import SendReviewModal from './SendReviewModal'
 
 const Review = () => {
 	const { commentStore } = useContext(Context)
 	const [modalVisible, setModalVisible] = useState(false)
 	const [commentChanged, setCommentChanged] = useState('')
 	const [newLikesCount, setNewLikesCount] = useState(0)
+	const [sendReviewModalVisible, setSendReviewModalVisible] = useState(false)
 
 	const settings = {
 		autoplay: false,
@@ -48,14 +50,23 @@ const Review = () => {
 				loop
 				muted
 			/>
-			<Slider
-				{...settings}
-				className='w-[66.6vw] h-[29.1vw] select-auto relative'
-			>
-				{!commentStore._isLoading &&
-					commentStore
-						.getRandomComments()
-						.map(comment => (
+
+			{!commentStore._isLoading && !commentStore.getRandomComments().length && (
+				<button
+					onClick={() => setSendReviewModalVisible(true)}
+					className='w-[15rem] h-[5rem] bg-primary hover:bg-opacity-90 transition-opacity text-secondary text-xl text-center px-2 z-10'
+				>
+					Оставить отзыв
+				</button>
+			)}
+
+			{!commentStore._isLoading &&
+				!!commentStore.getRandomComments().length && (
+					<Slider
+						{...settings}
+						className='w-[66.6vw] h-[29.1vw] select-auto relative'
+					>
+						{commentStore.getRandomComments().map(comment => (
 							<ReviewCard
 								key={comment._id}
 								commentId={comment._id}
@@ -72,7 +83,9 @@ const Review = () => {
 								setNewLikesCount={setNewLikesCount}
 							/>
 						))}
-			</Slider>
+					</Slider>
+				)}
+
 			<ReviewsModal
 				visible={modalVisible}
 				setVisible={setModalVisible}
@@ -80,6 +93,10 @@ const Review = () => {
 				setCommentChanged={setCommentChanged}
 				newLikesCount={newLikesCount}
 				setNewLikesCount={setNewLikesCount}
+			/>
+			<SendReviewModal
+				visible={sendReviewModalVisible}
+				setVisible={setSendReviewModalVisible}
 			/>
 		</div>
 	)
